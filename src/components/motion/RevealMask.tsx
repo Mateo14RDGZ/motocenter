@@ -20,7 +20,7 @@ export default function RevealMask({
       <motion.div
         initial={reduceMotion ? undefined : { clipPath: 'inset(0 0 100% 0)' }}
         whileInView={reduceMotion ? undefined : { clipPath: 'inset(0 0 0% 0)' }}
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: false, margin: '-60px' }}
         transition={{ duration: 0.7, delay, ease: [0.65, 0, 0.35, 1] }}
       >
         {children}
