@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import Reveal from '@/components/motion/Reveal';
+import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import {
   SCHEDULE as schedule,
   WEEKDAY_OPEN_MIN,
@@ -71,10 +73,8 @@ export default function HoursSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
           {/* Header + Status */}
-          <div className="lg:w-2/5 reveal-on-scroll stagger-1">
-            <span className="text-xs font-800 tracking-widest text-primary uppercase mb-3 block">
-              Horarios
-            </span>
+          <Reveal className="lg:w-2/5">
+            <span className="eyebrow text-primary mb-3 block">05 — Horarios</span>
             <h2 className="section-title text-foreground mb-5">Cuando estamos abiertos</h2>
             <p className="text-muted-foreground text-base leading-relaxed mb-6">
               Pasá por el local o escribinos por WhatsApp. También hacemos delivery.
@@ -97,48 +97,46 @@ export default function HoursSection() {
               <Icon name="TruckIcon" size={18} className="text-primary" />
               Hacemos delivery de pedidos
             </div>
-          </div>
+          </Reveal>
 
           {/* Schedule Table */}
-          <div className="lg:w-3/5 w-full reveal-on-scroll stagger-2">
-            <div className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden">
+          <div className="lg:w-3/5 w-full">
+            <StaggerGroup className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden">
               {schedule.map((item) => {
                 const isToday = dayNames[todayIndex] === item.day;
                 return (
-                  <div
-                    key={item.day}
-                    className={`flex items-center justify-between px-5 md:px-7 py-4 md:py-5 border-b border-border last:border-b-0 transition-colors ${
-                      isToday ? 'bg-primary/5' : 'hover:bg-muted/50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {isToday && (
-                        <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                      )}
-                      {!isToday && (
-                        <span className="w-2 h-2 rounded-full bg-transparent flex-shrink-0" />
-                      )}
-                      <span
-                        className={`text-sm md:text-base font-${isToday ? '800' : '600'} text-foreground`}
-                      >
-                        {item.day}
-                        {isToday && (
-                          <span className="ml-2 text-xs font-700 text-primary">(hoy)</span>
-                        )}
-                      </span>
+                  <StaggerItem key={item.day}>
+                    <div
+                      className={`flex items-center justify-between px-5 md:px-7 py-4 md:py-5 border-b border-border last:border-b-0 transition-colors ${
+                        isToday ? 'bg-primary/5' : 'hover:bg-muted/50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`w-2 h-2 rounded-full flex-shrink-0 ${isToday ? 'bg-primary' : 'bg-transparent'}`}
+                        />
+                        <span
+                          className={`text-sm md:text-base font-${isToday ? '800' : '600'} text-foreground`}
+                        >
+                          {item.day}
+                          {isToday && (
+                            <span className="ml-2 text-xs font-700 text-primary">(hoy)</span>
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`text-sm md:text-base font-mono font-600 ${item.open ? 'text-foreground' : 'text-muted-foreground'}`}
+                        >
+                          {item.hours}
+                        </span>
+                        {!item.open && <span className="closed-badge">Cerrado</span>}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`text-sm md:text-base font-600 ${item.open ? 'text-foreground' : 'text-muted-foreground'}`}
-                      >
-                        {item.hours}
-                      </span>
-                      {!item.open && <span className="closed-badge">Cerrado</span>}
-                    </div>
-                  </div>
+                  </StaggerItem>
                 );
               })}
-            </div>
+            </StaggerGroup>
           </div>
         </div>
       </div>

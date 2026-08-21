@@ -1,36 +1,34 @@
-import React from 'react';
+'use client';
+
+import { motion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
+import Marquee from '@/components/motion/Marquee';
 import { WA_LINK } from '@/config/business';
 
 const stats = [
-  {
-    icon: 'WrenchScrewdriverIcon' as const,
-    label: 'Taller',
-    value: 'Diagnóstico y reparación',
-  },
-  {
-    icon: 'CubeIcon' as const,
-    label: 'Repuestos',
-    value: 'Gran variedad disponible',
-  },
-  {
-    icon: 'TruckIcon' as const,
-    label: 'Delivery',
-    value: 'Pedidos a domicilio',
-  },
-  {
-    icon: 'UserGroupIcon' as const,
-    label: 'Atención',
-    value: 'Personalizada, cara a cara',
-  },
+  { icon: 'WrenchScrewdriverIcon' as const, label: 'Taller', value: 'Diagnóstico y reparación' },
+  { icon: 'CubeIcon' as const, label: 'Repuestos', value: 'Gran variedad disponible' },
+  { icon: 'TruckIcon' as const, label: 'Delivery', value: 'Pedidos a domicilio' },
+  { icon: 'UserGroupIcon' as const, label: 'Atención', value: 'Personalizada, cara a cara' },
 ];
+
+const tickerItems = [
+  'Repuestos',
+  'Reparación',
+  'Mantenimiento',
+  'Accesorios',
+  'Trinidad · Flores',
+  'Delivery',
+];
+
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image — TODO: reemplazar por foto real del taller o local de Motocenter */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-screen flex flex-col bg-ink overflow-hidden">
+      {/* Background image, cropped to the right two-thirds */}
+      <div className="absolute inset-y-0 right-0 w-full md:w-2/3 z-0">
         <AppImage
           src="https://images.unsplash.com/photo-1766170507513-ef249e0ca426"
           alt="Taller de motos pequeño y desordenado, con motos y repuestos, ambiente de barrio"
@@ -39,64 +37,80 @@ export default function HeroSection() {
           sizes="100vw"
           className="object-cover"
         />
-
-        {/* Scrim overlay — dark left-to-transparent for white text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10 md:from-ink md:via-ink/50 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
       </div>
 
-      {/* Mechanic texture accent */}
-      <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 mechanic-line pointer-events-none" />
+      <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
-      {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-48 md:pb-52">
-        <div className="max-w-2xl">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 border border-white/25 rounded-full bg-white/10 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-            <span className="text-xs font-700 tracking-widest text-white uppercase">
-              Trinidad · Flores · Uruguay
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="hero-title text-white mb-4">
-            Todo para
-            <br />
-            <span className="text-primary">tu moto</span>
-            <br />
-            en Trinidad
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/80 font-500 leading-relaxed mb-8 max-w-lg">
-            Repuestos, accesorios, reparación y servicio integral para motos. Consultanos directo
-            por WhatsApp.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-base"
+      {/* Content */}
+      <div className="relative z-10 flex-1 flex items-center pt-24 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+          <div className="max-w-2xl">
+            <motion.div
+              className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 border border-white/20 rounded-full bg-white/5"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeOut }}
             >
-              <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
-              Consultar por WhatsApp
-            </a>
-            <a href="#servicios" className="btn-secondary text-base">
-              Ver servicios
-              <Icon name="ChevronDownIcon" size={18} />
-            </a>
+              <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+              <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
+            </motion.div>
+
+            <motion.h1
+              className="hero-title text-paper mb-5"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.08, ease: easeOut }}
+            >
+              Todo para
+              <br />
+              <span className="text-primary">tu moto</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl text-paper/70 font-500 leading-relaxed mb-8 max-w-lg"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.2, ease: easeOut }}
+            >
+              Repuestos, accesorios, reparación y servicio integral para motos. Consultanos directo
+              por WhatsApp.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.3, ease: easeOut }}
+            >
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-base"
+              >
+                <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
+                Consultar por WhatsApp
+              </a>
+              <a href="#servicios" className="btn-secondary text-base">
+                Ver servicios
+                <Icon name="ChevronDownIcon" size={18} />
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Floating Stats Strip */}
-      <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-0">
-          <div className="bg-card rounded-t-2xl shadow-2xl border border-border border-b-0 px-4 py-4 md:px-8 md:py-5">
+      {/* Ticker */}
+      <div className="relative z-10 border-t border-white/10 bg-ink/60 backdrop-blur-sm text-paper/60 py-3">
+        <Marquee items={tickerItems} />
+      </div>
+
+      {/* Stats strip */}
+      <div className="relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="bg-card rounded-t-2xl shadow-2xl px-4 py-4 md:px-8 md:py-5">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-border">
               {stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-3 md:px-6 first:pl-0 last:pr-0">

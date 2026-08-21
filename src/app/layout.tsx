@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans, Unbounded } from 'next/font/google';
 import '../styles/tailwind.css';
 import { ADDRESS, WA_NUMBER } from '@/config/business';
 
@@ -8,6 +8,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-plus-jakarta-sans',
+  display: 'swap',
+});
+
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800', '900'],
+  variable: '--font-unbounded',
   display: 'swap',
 });
 
@@ -64,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={plusJakartaSans.variable}>
+    <html lang="es" className={`${plusJakartaSans.variable} ${unbounded.variable}`}>
       <head>
         <script
           type="application/ld+json"

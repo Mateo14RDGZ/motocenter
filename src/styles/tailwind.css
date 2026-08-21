@@ -3,26 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #f5f4f1;
-  --foreground: #1c1e20;
-  --primary: #24425c;
-  --primary-foreground: #ffffff;
-  --secondary: #262a2e;
-  --secondary-foreground: #f5f4f1;
-  --accent: #24425c;
-  --accent-foreground: #ffffff;
-  --muted: #e8e6e1;
-  --muted-foreground: #6b6560;
+  /* Paleta "Taller Trinidad": papel cálido + tinta + naranja señal como único acento */
+  --background: #f5f1e8;
+  --foreground: #14161a;
+  --primary: #ff5a1f;
+  --primary-foreground: #14161a;
+  --secondary: #14161a;
+  --secondary-foreground: #f5f1e8;
+  --accent: #ff5a1f;
+  --accent-foreground: #14161a;
+  --muted: #e8e1d1;
+  --muted-foreground: #6b6455;
   --card: #ffffff;
-  --card-foreground: #1c1e20;
-  --border: #d4d0c8;
-  --input: #d4d0c8;
-  --ring: #24425c;
-  --radius: 0.75rem;
+  --card-foreground: #14161a;
+  --border: #ddd4bf;
+  --input: #ddd4bf;
+  --ring: #ff5a1f;
+  --radius: 0.625rem;
   --font-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+  --font-display: var(--font-unbounded), 'Unbounded', sans-serif;
 
   /* Curvas de easing con más carácter que las nativas del navegador */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
@@ -79,55 +81,61 @@
 }
 
 @layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
   .hero-title {
-    font-size: clamp(2.8rem, 10vw, 7rem);
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 8.5vw, 6.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.01em;
+    font-weight: 700;
     text-transform: uppercase;
   }
 
   .section-title {
-    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.4vw, 2.75rem);
     line-height: 1.05;
-    letter-spacing: -0.03em;
-    font-weight: 800;
+    letter-spacing: -0.005em;
+    font-weight: 600;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-    transition:
-      opacity 0.55s var(--ease-out),
-      transform 0.55s var(--ease-out);
+  .eyebrow {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
   }
 
-  .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  .spec-number {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
 
-  .stagger-1 {
-    transition-delay: 0ms;
+  /* Divisor diagonal entre secciones oscuras y claras */
+  .skew-edge-top {
+    clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%);
   }
-  .stagger-2 {
-    transition-delay: 60ms;
+
+  .skew-edge-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), 0 100%);
   }
-  .stagger-3 {
-    transition-delay: 120ms;
-  }
-  .stagger-4 {
-    transition-delay: 180ms;
-  }
-  .stagger-5 {
-    transition-delay: 240ms;
-  }
-  .stagger-6 {
-    transition-delay: 300ms;
+
+  @media (min-width: 768px) {
+    .skew-edge-top {
+      clip-path: polygon(0 56px, 100% 0, 100% 100%, 0 100%);
+    }
+    .skew-edge-bottom {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 56px), 0 100%);
+    }
   }
 
   .whatsapp-pulse {
@@ -152,7 +160,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1;
     border-radius: inherit;
@@ -163,9 +171,16 @@
       90deg,
       transparent,
       transparent 3px,
-      rgba(36, 66, 92, 0.12) 3px,
-      rgba(36, 66, 92, 0.12) 4px
+      rgba(255, 90, 31, 0.14) 3px,
+      rgba(255, 90, 31, 0.14) 4px
     );
+  }
+
+  .grid-texture {
+    background-image:
+      linear-gradient(rgba(245, 241, 232, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245, 241, 232, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 
   .card-hover {
@@ -177,7 +192,7 @@
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px -12px rgba(26, 26, 26, 0.2);
+      box-shadow: 0 20px 40px -12px rgba(20, 20, 20, 0.22);
     }
   }
 
@@ -214,7 +229,7 @@
       background-color 0.2s ease,
       transform 0.16s var(--ease-out),
       box-shadow 0.2s ease;
-    box-shadow: 0 4px 16px rgba(36, 66, 92, 0.35);
+    box-shadow: 0 4px 16px rgba(255, 90, 31, 0.35);
     text-decoration: none;
     white-space: nowrap;
     min-height: 52px;
@@ -222,9 +237,9 @@
 
   @media (hover: hover) and (pointer: fine) {
     .btn-primary:hover {
-      background-color: #16293a;
+      background-color: #ff7040;
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(36, 66, 92, 0.45);
+      box-shadow: 0 8px 24px rgba(255, 90, 31, 0.45);
     }
   }
 
@@ -348,10 +363,6 @@
     border-radius: 9999px;
   }
 
-  .diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-  }
-
   .service-card-tall {
     min-height: 420px;
   }
@@ -375,10 +386,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .reveal-on-scroll {
-    opacity: 1;
-    transform: none;
   }
 }

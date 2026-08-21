@@ -10,7 +10,6 @@ import HoursSection from '@/app/components/HoursSection';
 import LocationSection from '@/app/components/LocationSection';
 import CtaSection from '@/app/components/CtaSection';
 import FloatingWhatsApp from '@/app/components/FloatingWhatsApp';
-import ScrollReveal from '@/app/components/ScrollReveal';
 
 export default function HomePage() {
   return (
@@ -26,7 +25,6 @@ export default function HomePage() {
       <CtaSection />
       <Footer />
       <FloatingWhatsApp />
-      <ScrollReveal />
     </main>
   );
 }

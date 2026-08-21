@@ -1,5 +1,5 @@
-import React from 'react';
 import Icon from '@/components/ui/AppIcon';
+import Reveal from '@/components/motion/Reveal';
 import { WA_LINK, MAPS_LINK, MAPS_EMBED, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
 export default function LocationSection() {
@@ -8,10 +8,8 @@ export default function LocationSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
           {/* Info Side */}
-          <div className="lg:w-2/5 reveal-on-scroll stagger-1">
-            <span className="text-xs font-800 tracking-widest text-primary uppercase mb-3 block">
-              Encontranos
-            </span>
+          <Reveal className="lg:w-2/5">
+            <span className="eyebrow text-primary mb-3 block">06 — Encontranos</span>
             <h2 className="section-title text-foreground mb-6">Dónde estamos</h2>
 
             {/* Address card */}
@@ -60,10 +58,10 @@ export default function LocationSection() {
                 WhatsApp
               </a>
             </div>
-          </div>
+          </Reveal>
 
           {/* Map Side */}
-          <div className="lg:w-3/5 w-full reveal-on-scroll stagger-2">
+          <Reveal delay={0.1} className="lg:w-3/5 w-full">
             <div
               className="rounded-3xl overflow-hidden border border-border shadow-lg"
               style={{ height: '420px' }}
@@ -83,7 +81,7 @@ export default function LocationSection() {
             <p className="text-xs text-muted-foreground text-center mt-3">
               {ADDRESS.full} — Abrí en Google Maps para navegación
             </p>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

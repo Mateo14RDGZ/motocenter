@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <AppLogo size={36} className="opacity-90" />
             <div>
-              <span className="font-black text-base uppercase tracking-tight text-secondary-foreground block">
+              <span className="font-display font-700 text-base uppercase tracking-tight text-secondary-foreground block">
                 Motocenter
               </span>
               <span className="text-xs text-secondary-foreground/50">Trinidad, Flores</span>
