@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
 import RevealMask from '@/components/motion/RevealMask';
+import TiltCard from '@/components/motion/TiltCard';
 import { buildWhatsAppLink } from '@/config/business';
 
 const WA_LINK = buildWhatsAppLink('Hola Motocenter, quería consultar por un servicio...');
@@ -122,8 +123,11 @@ export default function ServicesSection() {
             </a>
           </div>
 
-          {/* Image panel — desktop only, crossfades with the active row */}
-          <div className="hidden lg:block relative rounded-3xl overflow-hidden bg-ink min-h-[440px]">
+          {/* Image panel — desktop only, crossfades with the active row + tilt 3D */}
+          <TiltCard
+            max={4}
+            className="hidden lg:block relative rounded-3xl overflow-hidden bg-ink min-h-[440px]"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.code}
@@ -157,7 +161,7 @@ export default function ServicesSection() {
                 </p>
               </div>
             </div>
-          </div>
+          </TiltCard>
         </div>
       </div>
     </section>

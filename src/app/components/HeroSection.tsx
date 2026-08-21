@@ -4,22 +4,28 @@ import { motion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
 import Marquee from '@/components/motion/Marquee';
+import SplitText from '@/components/motion/SplitText';
+import Magnetic from '@/components/motion/Magnetic';
 import { WA_LINK } from '@/config/business';
 
 const stats = [
-  { icon: 'WrenchScrewdriverIcon' as const, label: 'Taller', value: 'Diagnóstico y reparación' },
-  { icon: 'CubeIcon' as const, label: 'Repuestos', value: 'Gran variedad disponible' },
-  { icon: 'TruckIcon' as const, label: 'Delivery', value: 'Pedidos a domicilio' },
+  {
+    icon: 'WrenchScrewdriverIcon' as const,
+    label: 'Diagnóstico',
+    value: 'Revisión antes de tocar nada',
+  },
+  { icon: 'Cog6ToothIcon' as const, label: 'Reparación', value: 'Mecánica general de motos' },
+  { icon: 'CubeIcon' as const, label: 'Repuestos', value: 'Los que usamos en el taller' },
   { icon: 'UserGroupIcon' as const, label: 'Atención', value: 'Personalizada, cara a cara' },
 ];
 
 const tickerItems = [
-  'Repuestos',
+  'Diagnóstico',
   'Reparación',
   'Mantenimiento',
-  'Accesorios',
+  'Repuestos',
   'Trinidad · Flores',
-  'Delivery',
+  'Service',
 ];
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
@@ -57,16 +63,12 @@ export default function HeroSection() {
               <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
             </motion.div>
 
-            <motion.h1
-              className="hero-title text-paper mb-5"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.08, ease: easeOut }}
-            >
-              Todo para
-              <br />
-              <span className="text-primary">tu moto</span>
-            </motion.h1>
+            <SplitText text="Tu moto en" className="hero-title text-paper block" delay={0.1} />
+            <SplitText
+              text="buenas manos"
+              className="hero-title text-primary block mb-5"
+              delay={0.24}
+            />
 
             <motion.p
               className="text-lg md:text-xl text-paper/70 font-500 leading-relaxed mb-8 max-w-lg"
@@ -74,8 +76,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2, ease: easeOut }}
             >
-              Repuestos, accesorios, reparación y servicio integral para motos. Consultanos directo
-              por WhatsApp.
+              Taller mecánico de motos en Trinidad: diagnóstico, reparación y mantenimiento, con los
+              repuestos que hacen falta para dejarla andando. Consultanos por WhatsApp.
             </motion.p>
 
             <motion.div
@@ -84,15 +86,17 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.3, ease: easeOut }}
             >
-              <a
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary text-base"
-              >
-                <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
-                Consultar por WhatsApp
-              </a>
+              <Magnetic>
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-base"
+                >
+                  <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
+                  Consultar por WhatsApp
+                </a>
+              </Magnetic>
               <a href="#servicios" className="btn-secondary text-base">
                 Ver servicios
                 <Icon name="ChevronDownIcon" size={18} />

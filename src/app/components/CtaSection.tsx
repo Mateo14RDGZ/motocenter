@@ -1,14 +1,26 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
 import RevealMask from '@/components/motion/RevealMask';
+import Magnetic from '@/components/motion/Magnetic';
 import { WA_LINK, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
 export default function CtaSection() {
   return (
     <section className="py-20 md:py-24 bg-ink text-secondary-foreground relative overflow-hidden">
-      {/* Decorative background accent */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary/15 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+      {/* Texto gigante de fondo en movimiento continuo */}
+      <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none">
+        <div className="flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <span
+              key={copy}
+              className="font-display font-800 uppercase text-[18vw] leading-none whitespace-nowrap px-6 text-transparent"
+              style={{ WebkitTextStroke: '1.5px rgba(245,241,232,0.08)' }}
+            >
+              Motocenter Motocenter
+            </span>
+          ))}
+        </div>
+      </div>
       <div className="absolute inset-0 mechanic-line opacity-20 pointer-events-none" />
       <div className="absolute inset-0 grid-texture opacity-30 pointer-events-none" />
 
@@ -22,7 +34,7 @@ export default function CtaSection() {
 
           <RevealMask>
             <h2 className="section-title text-secondary-foreground mb-5 text-balance">
-              ¿Necesitás un repuesto o tenés un problema con tu moto?
+              ¿Tu moto necesita una mano?
             </h2>
           </RevealMask>
           <p className="text-secondary-foreground/70 text-lg leading-relaxed mb-8 max-w-xl mx-auto">
@@ -30,15 +42,17 @@ export default function CtaSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-base px-8"
-            >
-              <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
-              Hablar por WhatsApp
-            </a>
+            <Magnetic>
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-base px-8"
+              >
+                <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} variant="solid" />
+                Hablar por WhatsApp
+              </a>
+            </Magnetic>
             <a href="#ubicacion" className="btn-secondary text-base px-8">
               <Icon name="MapPinIcon" size={18} />
               Ver ubicación

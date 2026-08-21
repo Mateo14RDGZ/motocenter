@@ -28,22 +28,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `Motocenter | Repuestos, accesorios y servicio para motos en ${ADDRESS.locality}`,
-  description: `Motocenter en ${ADDRESS.locality}, ${ADDRESS.region}. Reparación de motos, repuestos, accesorios y servicio. Atención directa por WhatsApp.`,
+  title: `Motocenter | Taller mecánico de motos en ${ADDRESS.locality}`,
+  description: `Motocenter, taller mecánico de motos en ${ADDRESS.locality}, ${ADDRESS.region}. Diagnóstico, reparación, mantenimiento y repuestos. Atención directa por WhatsApp.`,
   keywords: [
     'Motocenter Trinidad',
-    'repuestos motos Trinidad',
-    'taller motos Trinidad',
-    'accesorios motos Trinidad Flores',
-    'reparación motos Trinidad',
+    'taller de motos Trinidad',
+    'mecánico de motos Trinidad',
+    'reparación de motos Trinidad',
+    'repuestos motos Trinidad Flores',
   ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Motocenter — Todo para tu moto en Trinidad',
+    title: 'Motocenter — Taller mecánico de motos en Trinidad',
     description:
-      'Reparación, repuestos, accesorios y mantenimiento para motos en Trinidad, Flores. Consultanos por WhatsApp.',
+      'Diagnóstico, reparación, mantenimiento y repuestos para motos en Trinidad, Flores. Consultanos por WhatsApp.',
     type: 'website',
     locale: 'es_UY',
     url: siteUrl,
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: '/assets/images/app_logo.png',
         width: 1200,
         height: 630,
-        alt: 'Motocenter Trinidad - Repuestos y Taller de Motos',
+        alt: 'Motocenter Trinidad - Taller mecánico de motos',
       },
     ],
   },
@@ -78,9 +78,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
+              '@type': 'MotorcycleRepair',
               name: 'Motocenter',
-              description: `Reparación de motos, repuestos, accesorios y servicio integral para motos en ${ADDRESS.locality}, ${ADDRESS.region}, Uruguay.`,
+              description: `Taller mecánico de motos en ${ADDRESS.locality}, ${ADDRESS.region}, Uruguay. Diagnóstico, reparación, mantenimiento y repuestos.`,
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: ADDRESS.street,

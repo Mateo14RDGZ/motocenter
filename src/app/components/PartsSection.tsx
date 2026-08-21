@@ -7,7 +7,7 @@ import RevealMask from '@/components/motion/RevealMask';
 import { buildWhatsAppLink } from '@/config/business';
 
 const WA_LINK = buildWhatsAppLink(
-  'Hola Motocenter, quería consultar disponibilidad de repuestos/accesorios...'
+  'Hola Motocenter, quería consultar por un repuesto para mi moto...'
 );
 
 interface Category {
@@ -75,14 +75,15 @@ export default function PartsSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-14">
           <RevealMask>
-            <span className="eyebrow text-primary mb-3 block">02 — Catálogo</span>
+            <span className="eyebrow text-primary mb-3 block">02 — El respaldo del taller</span>
             <h2 className="section-title text-secondary-foreground max-w-lg">
-              ¿Precisás algo para tu moto?
+              Los repuestos que hacen falta para arreglarla
             </h2>
           </RevealMask>
           <RevealMask delay={0.1}>
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-sm md:text-right">
-              Tocá una categoría para ver el detalle. Consultanos disponibilidad por WhatsApp.
+              Repuestos y accesorios que conseguimos y usamos en cada reparación. Tocá una categoría
+              para ver el detalle.
             </p>
           </RevealMask>
         </div>
@@ -153,10 +154,10 @@ export default function PartsSection() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 mt-10">
             <div className="text-center sm:text-left">
               <p className="font-700 text-secondary-foreground text-base mb-1">
-                ¿No encontrás lo que buscás?
+                ¿No sabés si tenemos el repuesto que precisás?
               </p>
               <p className="text-muted-foreground text-sm">
-                Escribinos y te conseguimos lo que precisás.
+                Contanos qué le pasa a tu moto y lo vemos en el taller.
               </p>
             </div>
             <a

@@ -1,13 +1,15 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
 import RevealMask from '@/components/motion/RevealMask';
+import CountUp from '@/components/motion/CountUp';
+import Magnetic from '@/components/motion/Magnetic';
 import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import { WA_LINK, ADDRESS } from '@/config/business';
 
 const highlights = [
-  { icon: 'WrenchScrewdriverIcon' as const, text: 'Taller y reparación' },
-  { icon: 'CubeIcon' as const, text: 'Repuestos variados' },
-  { icon: 'ShoppingBagIcon' as const, text: 'Accesorios disponibles' },
+  { icon: 'WrenchScrewdriverIcon' as const, text: 'Diagnóstico y reparación' },
+  { icon: 'Cog6ToothIcon' as const, text: 'Mantenimiento y service' },
+  { icon: 'CubeIcon' as const, text: 'Repuestos para el arreglo' },
   { icon: 'TruckIcon' as const, text: 'Delivery incluido' },
   { icon: 'ChatBubbleOvalLeftEllipsisIcon' as const, text: 'Atención por WhatsApp' },
   { icon: 'MapPinIcon' as const, text: 'En el centro de Trinidad' },
@@ -23,28 +25,31 @@ export default function AboutSection() {
             <RevealMask>
               <span className="eyebrow text-primary mb-3 block">03 — Sobre Motocenter</span>
               <div className="flex items-start gap-5 mb-6">
-                <span className="spec-number text-6xl md:text-7xl text-primary leading-none">
-                  3
-                </span>
+                <CountUp
+                  to={3}
+                  className="spec-number text-6xl md:text-7xl text-primary leading-none"
+                />
                 <h2 className="section-title text-foreground max-w-md pt-2">
-                  Taller, repuestos y accesorios en un mismo lugar
+                  Diagnóstico, reparación y el repuesto que hace falta
                 </h2>
               </div>
             </RevealMask>
             <Reveal delay={0.1}>
               <p className="text-muted-foreground text-base leading-relaxed mb-5">
-                Motocenter reúne taller, mantenimiento, repuestos y accesorios en un mismo lugar. La
-                idea es simple: que no tengas que ir a tres comercios distintos para resolver un
-                problema con tu moto.
+                Motocenter es el taller mecánico de motos de Trinidad. Diagnosticamos qué le pasa a
+                tu moto, la reparamos y conseguimos el repuesto que haga falta para dejarla andando
+                de nuevo.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed mb-8">
-                Estamos en {ADDRESS.full}. Si precisás un repuesto, querés hacer un servicio o tenés
-                algún problema con tu moto, escribinos y te damos una mano.
+                Estamos en {ADDRESS.full}. Si tenés un problema con tu moto o querés hacer un
+                service, escribinos y te damos una mano.
               </p>
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark">
-                <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={18} variant="solid" />
-                Escribinos
-              </a>
+              <Magnetic className="inline-block">
+                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark">
+                  <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={18} variant="solid" />
+                  Escribinos
+                </a>
+              </Magnetic>
             </Reveal>
           </div>
 
