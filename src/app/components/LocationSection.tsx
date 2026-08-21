@@ -13,7 +13,7 @@ export default function LocationSection() {
           {/* Info Side */}
           <div className="lg:w-2/5 w-full">
             <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">07 — Encontranos</span>
+              <span className="eyebrow text-primary mb-3 block">08 — Encontranos</span>
               <h2 className="section-title text-foreground mb-6">Dónde estamos</h2>
             </RevealMask>
 

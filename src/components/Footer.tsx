@@ -34,6 +34,9 @@ export default function Footer() {
           <a href="#accesorios" className="hover:text-secondary-foreground transition-colors">
             Accesorios
           </a>
+          <a href="#como-trabajamos" className="hover:text-secondary-foreground transition-colors">
+            Cómo trabajamos
+          </a>
           <a href="#horarios" className="hover:text-secondary-foreground transition-colors">
             Horarios
           </a>

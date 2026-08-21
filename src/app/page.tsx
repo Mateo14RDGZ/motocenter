@@ -6,6 +6,7 @@ import ServicesSection from '@/app/components/ServicesSection';
 import PartsSection from '@/app/components/PartsSection';
 import AccessoriesSection from '@/app/components/AccessoriesSection';
 import AboutSection from '@/app/components/AboutSection';
+import HowWeWorkSection from '@/app/components/HowWeWorkSection';
 import GallerySection from '@/app/components/GallerySection';
 import HoursSection from '@/app/components/HoursSection';
 import LocationSection from '@/app/components/LocationSection';
@@ -21,6 +22,7 @@ export default function HomePage() {
       <PartsSection />
       <AccessoriesSection />
       <AboutSection />
+      <HowWeWorkSection />
       <GallerySection />
       <HoursSection />
       <LocationSection />

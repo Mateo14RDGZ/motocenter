@@ -53,7 +53,7 @@ export default function ServicesSection() {
   const current = services[active];
 
   return (
-    <section id="servicios" className="py-20 md:py-24 bg-background">
+    <section id="servicios" className="py-20 md:py-24 bg-background overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <RevealMask className="mb-10 md:mb-14">
           <span className="eyebrow text-primary mb-3 block">01 — Qué hacemos</span>
