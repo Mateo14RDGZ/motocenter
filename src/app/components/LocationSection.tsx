@@ -1,6 +1,7 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
 import RevealMask from '@/components/motion/RevealMask';
+import ScaleIn from '@/components/motion/ScaleIn';
 import Magnetic from '@/components/motion/Magnetic';
 import { WA_LINK, MAPS_LINK, MAPS_EMBED, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
@@ -65,7 +66,7 @@ export default function LocationSection() {
           </div>
 
           {/* Mapa chico */}
-          <Reveal delay={0.15} className="lg:w-3/5 w-full">
+          <ScaleIn delay={0.15} className="lg:w-3/5 w-full">
             <div
               className="rounded-2xl overflow-hidden border border-border shadow-sm"
               style={{ height: '260px' }}
@@ -84,7 +85,7 @@ export default function LocationSection() {
             <p className="text-xs text-muted-foreground text-center mt-3">
               {ADDRESS.full} — Abrí en Google Maps para navegación
             </p>
-          </Reveal>
+          </ScaleIn>
         </div>
       </div>
     </section>

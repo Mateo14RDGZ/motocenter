@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
 import RevealMask from '@/components/motion/RevealMask';
+import SlideIn from '@/components/motion/SlideIn';
 import TiltCard from '@/components/motion/TiltCard';
 import { buildWhatsAppLink } from '@/config/business';
 
@@ -63,53 +64,54 @@ export default function ServicesSection() {
           {/* Selector list */}
           <div className="flex flex-col border-t border-border">
             {services.map((s, i) => (
-              <button
-                key={s.code}
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
-                className={`group text-left flex items-center gap-4 md:gap-6 py-5 md:py-6 border-b border-border transition-colors ${
-                  active === i ? 'bg-muted/60' : ''
-                }`}
-              >
-                <span
-                  className={`spec-number text-2xl md:text-3xl transition-colors flex-shrink-0 ${
-                    active === i ? 'text-primary' : 'text-muted-foreground/40'
+              <SlideIn key={s.code} delay={i * 0.05}>
+                <button
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                  className={`w-full group text-left flex items-center gap-4 md:gap-6 py-5 md:py-6 border-b border-border transition-colors ${
+                    active === i ? 'bg-muted/60' : ''
                   }`}
                 >
-                  {s.code}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <h3
-                    className={`font-display font-600 text-lg md:text-xl tracking-tight transition-colors ${
-                      active === i ? 'text-foreground' : 'text-muted-foreground'
+                  <span
+                    className={`spec-number text-2xl md:text-3xl transition-colors flex-shrink-0 ${
+                      active === i ? 'text-primary' : 'text-muted-foreground/40'
                     }`}
                   >
-                    {s.title}
-                  </h3>
-                  <AnimatePresence initial={false}>
-                    {active === i && (
-                      <motion.p
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-muted-foreground text-sm leading-relaxed mt-1.5 overflow-hidden lg:hidden"
-                      >
-                        {s.description}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-                <Icon
-                  name="ArrowRightIcon"
-                  size={18}
-                  className={`flex-shrink-0 transition-all duration-200 ${
-                    active === i
-                      ? 'text-primary translate-x-0 opacity-100'
-                      : 'text-transparent -translate-x-2 opacity-0'
-                  }`}
-                />
-              </button>
+                    {s.code}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      className={`font-display font-600 text-lg md:text-xl tracking-tight transition-colors ${
+                        active === i ? 'text-foreground' : 'text-muted-foreground'
+                      }`}
+                    >
+                      {s.title}
+                    </h3>
+                    <AnimatePresence initial={false}>
+                      {active === i && (
+                        <motion.p
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-muted-foreground text-sm leading-relaxed mt-1.5 overflow-hidden lg:hidden"
+                        >
+                          {s.description}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <Icon
+                    name="ArrowRightIcon"
+                    size={18}
+                    className={`flex-shrink-0 transition-all duration-200 ${
+                      active === i
+                        ? 'text-primary translate-x-0 opacity-100'
+                        : 'text-transparent -translate-x-2 opacity-0'
+                    }`}
+                  />
+                </button>
+              </SlideIn>
             ))}
 
             <a

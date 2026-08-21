@@ -23,11 +23,7 @@ export default function Reveal({
 
   const variants: Variants = {
     hidden: { opacity: 0, y: reduceMotion ? 0 : y },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
-    },
+    visible: { opacity: 1, y: 0 },
   };
 
   const MotionTag = as === 'span' ? motion.span : motion.div;
@@ -39,6 +35,7 @@ export default function Reveal({
       whileInView="visible"
       viewport={{ once: false, margin: '-80px' }}
       variants={variants}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </MotionTag>
@@ -54,5 +51,7 @@ export const staggerContainer: Variants = {
 
 export const staggerItem: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0 },
 };
+
+export const staggerItemTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const };

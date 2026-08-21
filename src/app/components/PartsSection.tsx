@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Icon from '@/components/ui/AppIcon';
 import RevealMask from '@/components/motion/RevealMask';
+import SlideIn from '@/components/motion/SlideIn';
 import { buildWhatsAppLink } from '@/config/business';
 
 const WA_LINK = buildWhatsAppLink(
@@ -81,59 +82,61 @@ export default function PartsSection() {
           {categories.map((cat, i) => {
             const isOpen = openIndex === i;
             return (
-              <div key={cat.code} className="border-b border-white/15">
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center gap-4 md:gap-6 py-5 md:py-6 text-left group"
-                  aria-expanded={isOpen}
-                >
-                  <span className="spec-number text-sm md:text-base text-primary w-10 flex-shrink-0">
-                    {cat.code}
-                  </span>
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <Icon name={cat.icon} size={18} className="text-primary" />
-                  </div>
-                  <h3 className="font-display font-600 text-lg md:text-2xl tracking-tight flex-1">
-                    {cat.label}
-                  </h3>
-                  <motion.span
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex-shrink-0 text-primary"
+              <SlideIn key={cat.code} direction="right" delay={i * 0.05}>
+                <div className="border-b border-white/15">
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="w-full flex items-center gap-4 md:gap-6 py-5 md:py-6 text-left group"
+                    aria-expanded={isOpen}
                   >
-                    <Icon name="PlusIcon" size={22} />
-                  </motion.span>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
+                    <span className="spec-number text-sm md:text-base text-primary w-10 flex-shrink-0">
+                      {cat.code}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <Icon name={cat.icon} size={18} className="text-primary" />
+                    </div>
+                    <h3 className="font-display font-600 text-lg md:text-2xl tracking-tight flex-1">
+                      {cat.label}
+                    </h3>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex-shrink-0 text-primary"
                     >
-                      <div className="pb-6 pl-[3.75rem] md:pl-[4.75rem] flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-                        <p className="text-muted-foreground text-sm md:text-base max-w-md">
-                          {cat.description}
-                        </p>
-                        <a
-                          href={buildWhatsAppLink(
-                            `Hola Motocenter, quería consultar disponibilidad de ${cat.label.toLowerCase()}...`
-                          )}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm font-700 text-primary hover:text-paper transition-colors flex-shrink-0"
-                        >
-                          Consultar {cat.label.toLowerCase()}
-                          <Icon name="ArrowRightIcon" size={14} />
-                        </a>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                      <Icon name="PlusIcon" size={22} />
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-6 pl-[3.75rem] md:pl-[4.75rem] flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+                          <p className="text-muted-foreground text-sm md:text-base max-w-md">
+                            {cat.description}
+                          </p>
+                          <a
+                            href={buildWhatsAppLink(
+                              `Hola Motocenter, quería consultar disponibilidad de ${cat.label.toLowerCase()}...`
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-700 text-primary hover:text-paper transition-colors flex-shrink-0"
+                          >
+                            Consultar {cat.label.toLowerCase()}
+                            <Icon name="ArrowRightIcon" size={14} />
+                          </a>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </SlideIn>
             );
           })}
         </div>

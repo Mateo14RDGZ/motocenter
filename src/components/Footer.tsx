@@ -2,12 +2,16 @@ import React from 'react';
 
 import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
+import Reveal from '@/components/motion/Reveal';
 import { WA_LINK, MAPS_LINK, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
 export default function Footer() {
   return (
     <footer className="bg-secondary text-secondary-foreground border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex flex-col items-center text-center">
+      <Reveal
+        y={16}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex flex-col items-center text-center"
+      >
         {/* Brand */}
         <div className="flex flex-col items-center gap-2 mb-6">
           <AppLogo size={40} className="opacity-90" />
@@ -95,7 +99,7 @@ export default function Footer() {
             </a>
           </span>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import RevealMask from '@/components/motion/RevealMask';
+import ScaleIn from '@/components/motion/ScaleIn';
 
 // TODO: reemplazar todas las imágenes de esta sección por fotos reales
 // del local, el taller, las motos y los repuestos de Motocenter.
@@ -79,23 +80,26 @@ export default function GallerySection() {
         onScroll={handleScroll}
         className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pl-4 pr-4 sm:pl-6 sm:pr-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        {galleryItems.map((item) => (
-          <div
+        {galleryItems.map((item, i) => (
+          <ScaleIn
             key={item.label}
-            className="relative flex-shrink-0 snap-center rounded-2xl overflow-hidden w-[78vw] sm:w-[45vw] md:w-[32vw] lg:w-[28vw] aspect-[4/5]"
+            delay={i * 0.04}
+            className="flex-shrink-0 snap-center w-[78vw] sm:w-[45vw] md:w-[32vw] lg:w-[28vw]"
           >
-            <AppImage
-              src={item.image}
-              alt={item.alt}
-              fill
-              sizes="(max-width: 640px) 78vw, 30vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
-            <span className="absolute bottom-4 left-4 text-sm font-700 text-white uppercase tracking-wide">
-              {item.label}
-            </span>
-          </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
+              <AppImage
+                src={item.image}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 78vw, 30vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
+              <span className="absolute bottom-4 left-4 text-sm font-700 text-white uppercase tracking-wide">
+                {item.label}
+              </span>
+            </div>
+          </ScaleIn>
         ))}
       </div>
 

@@ -11,12 +11,10 @@ interface SplitTextProps {
 
 const wordVariants: Variants = {
   hidden: { y: '110%', rotate: 4 },
-  visible: {
-    y: '0%',
-    rotate: 0,
-    transition: { type: 'spring', stiffness: 220, damping: 24 },
-  },
+  visible: { y: '0%', rotate: 0 },
 };
+
+const wordTransition = { type: 'spring', stiffness: 220, damping: 24 } as const;
 
 /**
  * Anima cada palabra por separado con un spring. Un solo IntersectionObserver en el
@@ -51,7 +49,7 @@ export default function SplitText({ text, className, delay = 0, as = 'h1' }: Spl
     >
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden align-top mr-[0.28em] last:mr-0">
-          <motion.span className="inline-block" variants={wordVariants}>
+          <motion.span className="inline-block" variants={wordVariants} transition={wordTransition}>
             {word}
           </motion.span>
         </span>

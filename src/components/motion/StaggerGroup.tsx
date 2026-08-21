@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
-import { staggerContainer, staggerItem } from './Reveal';
+import { staggerContainer, staggerItem, staggerItemTransition } from './Reveal';
 
 export function StaggerGroup({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -20,7 +20,7 @@ export function StaggerGroup({ children, className }: { children: ReactNode; cla
 
 export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <motion.div className={className} variants={staggerItem}>
+    <motion.div className={className} variants={staggerItem} transition={staggerItemTransition}>
       {children}
     </motion.div>
   );
