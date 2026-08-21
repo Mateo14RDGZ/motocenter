@@ -35,6 +35,9 @@ export const MAPS_LINK =
 
 export const MAPS_EMBED = `https://maps.google.com/maps?q=${MAPS_LAT},${MAPS_LNG}&z=16&output=embed`;
 
+// Calificación real de Motocenter en su ficha de Google (confirmada por el cliente)
+export const GOOGLE_RATING = 5.0;
+
 // TODO: confirmar horarios reales de atención
 export interface DaySchedule {
   day: string;

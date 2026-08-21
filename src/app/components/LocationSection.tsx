@@ -3,6 +3,7 @@ import Reveal from '@/components/motion/Reveal';
 import RevealMask from '@/components/motion/RevealMask';
 import ScaleIn from '@/components/motion/ScaleIn';
 import Magnetic from '@/components/motion/Magnetic';
+import GoogleRatingBadge from '@/components/GoogleRatingBadge';
 import { WA_LINK, MAPS_LINK, MAPS_EMBED, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
 export default function LocationSection() {
@@ -14,7 +15,8 @@ export default function LocationSection() {
           <div className="lg:w-2/5 w-full">
             <RevealMask>
               <span className="eyebrow text-primary mb-3 block">08 — Encontranos</span>
-              <h2 className="section-title text-foreground mb-6">Dónde estamos</h2>
+              <h2 className="section-title text-foreground mb-4">Dónde estamos</h2>
+              <GoogleRatingBadge className="text-foreground mb-6" />
             </RevealMask>
 
             <Reveal delay={0.1}>

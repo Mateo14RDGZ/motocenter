@@ -6,6 +6,7 @@ import Icon from '@/components/ui/AppIcon';
 import Marquee from '@/components/motion/Marquee';
 import SplitText from '@/components/motion/SplitText';
 import Magnetic from '@/components/motion/Magnetic';
+import GoogleRatingBadge from '@/components/GoogleRatingBadge';
 import { WA_LINK } from '@/config/business';
 
 const stats = [
@@ -54,13 +55,16 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="max-w-2xl">
             <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 border border-white/20 rounded-full bg-white/5"
+              className="flex flex-wrap items-center gap-3 mb-6"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: easeOut }}
             >
-              <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-              <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-white/5">
+                <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
+              </div>
+              <GoogleRatingBadge className="px-3 py-1.5 border border-white/20 rounded-full bg-white/5 text-paper hover:bg-white/10 transition-colors" />
             </motion.div>
 
             <SplitText text="Tu moto en" className="hero-title text-paper block" delay={0.1} />
