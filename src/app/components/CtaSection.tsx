@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
+import RevealMask from '@/components/motion/RevealMask';
 import { WA_LINK, ADDRESS, DISPLAY_PHONE } from '@/config/business';
 
 export default function CtaSection() {
@@ -19,9 +20,11 @@ export default function CtaSection() {
             <span className="eyebrow text-secondary-foreground/70">Atención directa</span>
           </div>
 
-          <h2 className="section-title text-secondary-foreground mb-5 text-balance">
-            ¿Necesitás un repuesto o tenés un problema con tu moto?
-          </h2>
+          <RevealMask>
+            <h2 className="section-title text-secondary-foreground mb-5 text-balance">
+              ¿Necesitás un repuesto o tenés un problema con tu moto?
+            </h2>
+          </RevealMask>
           <p className="text-secondary-foreground/70 text-lg leading-relaxed mb-8 max-w-xl mx-auto">
             Escribinos y consultanos. Te respondemos rápido y sin vueltas.
           </p>

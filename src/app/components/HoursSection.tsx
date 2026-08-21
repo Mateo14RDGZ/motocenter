@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
-import Reveal from '@/components/motion/Reveal';
+import RevealMask from '@/components/motion/RevealMask';
+import ClockDial from '@/components/motion/ClockDial';
 import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import {
   SCHEDULE as schedule,
@@ -15,7 +16,7 @@ import {
 const URUGUAY_TIMEZONE = 'America/Montevideo';
 
 // Hora/día actuales en Uruguay, sin importar la zona horaria del visitante
-function getUruguayNow(): { day: number; timeNum: number } {
+function getUruguayNow(): { day: number; hour: number; minute: number; timeNum: number } {
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone: URUGUAY_TIMEZONE,
     weekday: 'short',
@@ -38,12 +39,10 @@ function getUruguayNow(): { day: number; timeNum: number } {
     Sat: 6,
   };
 
-  return { day: weekdayMap[weekdayShort] ?? 0, timeNum: hour * 60 + minute };
+  return { day: weekdayMap[weekdayShort] ?? 0, hour, minute, timeNum: hour * 60 + minute };
 }
 
-function getBusinessStatus(): { isOpen: boolean; label: string } {
-  const { day, timeNum } = getUruguayNow();
-
+function getBusinessStatus(day: number, timeNum: number): { isOpen: boolean; label: string } {
   if (day >= 1 && day <= 5) {
     if (timeNum >= WEEKDAY_OPEN_MIN && timeNum < WEEKDAY_CLOSE_MIN) {
       return { isOpen: true, label: 'Abierto ahora' };
@@ -60,36 +59,47 @@ function getBusinessStatus(): { isOpen: boolean; label: string } {
 const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
 export default function HoursSection() {
-  const [status, setStatus] = useState({ isOpen: false, label: 'Cerrado ahora' });
-  const [todayIndex, setTodayIndex] = useState(0);
+  const [now, setNow] = useState({ day: 0, hour: 0, minute: 0, timeNum: 0 });
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setStatus(getBusinessStatus());
-    setTodayIndex(getUruguayNow().day);
+    setNow(getUruguayNow());
+    setReady(true);
   }, []);
+
+  const status = getBusinessStatus(now.day, now.timeNum);
 
   return (
     <section id="horarios" className="py-20 md:py-24 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
           {/* Header + Status */}
-          <Reveal className="lg:w-2/5">
-            <span className="eyebrow text-primary mb-3 block">05 — Horarios</span>
-            <h2 className="section-title text-foreground mb-5">Cuando estamos abiertos</h2>
-            <p className="text-muted-foreground text-base leading-relaxed mb-6">
-              Pasá por el local o escribinos por WhatsApp. También hacemos delivery.
-            </p>
+          <div className="lg:w-2/5">
+            <RevealMask>
+              <span className="eyebrow text-primary mb-3 block">05 — Horarios</span>
+              <h2 className="section-title text-foreground mb-5">Cuando estamos abiertos</h2>
+              <p className="text-muted-foreground text-base leading-relaxed mb-6">
+                Pasá por el local o escribinos por WhatsApp. También hacemos delivery.
+              </p>
+            </RevealMask>
 
-            {/* Live status */}
-            <div className="inline-flex items-center gap-3 bg-card border border-border rounded-2xl px-5 py-3.5 shadow-sm mb-6">
-              <span
-                className={`w-3 h-3 rounded-full flex-shrink-0 ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`}
-              />
-              <span
-                className={`text-sm font-700 ${status.isOpen ? 'text-green-700' : 'text-red-700'}`}
-              >
-                {status.label}
-              </span>
+            {/* Live status con reloj radial */}
+            <div className="flex items-center gap-4 bg-card border border-border rounded-2xl px-5 py-4 shadow-sm mb-6 w-fit">
+              {ready && (
+                <ClockDial hour={now.hour} minute={now.minute} isOpen={status.isOpen} size={64} />
+              )}
+              <div>
+                <span
+                  className={`text-sm font-700 block ${status.isOpen ? 'text-green-700' : 'text-red-700'}`}
+                >
+                  {status.label}
+                </span>
+                <span className="text-xs text-muted-foreground font-mono">
+                  {ready
+                    ? `${String(now.hour).padStart(2, '0')}:${String(now.minute).padStart(2, '0')} · ${dayNames[now.day]}`
+                    : '—'}
+                </span>
+              </div>
             </div>
 
             {/* Delivery badge */}
@@ -97,13 +107,13 @@ export default function HoursSection() {
               <Icon name="TruckIcon" size={18} className="text-primary" />
               Hacemos delivery de pedidos
             </div>
-          </Reveal>
+          </div>
 
           {/* Schedule Table */}
           <div className="lg:w-3/5 w-full">
             <StaggerGroup className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden">
               {schedule.map((item) => {
-                const isToday = dayNames[todayIndex] === item.day;
+                const isToday = dayNames[now.day] === item.day;
                 return (
                   <StaggerItem key={item.day}>
                     <div

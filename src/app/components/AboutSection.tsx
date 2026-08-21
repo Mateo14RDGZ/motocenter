@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
+import RevealMask from '@/components/motion/RevealMask';
 import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import { WA_LINK, ADDRESS } from '@/config/business';
 
@@ -19,7 +20,7 @@ export default function AboutSection() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           {/* Text Side */}
           <div className="lg:w-1/2">
-            <Reveal>
+            <RevealMask>
               <span className="eyebrow text-primary mb-3 block">03 — Sobre Motocenter</span>
               <div className="flex items-start gap-5 mb-6">
                 <span className="spec-number text-6xl md:text-7xl text-primary leading-none">
@@ -29,7 +30,7 @@ export default function AboutSection() {
                   Taller, repuestos y accesorios en un mismo lugar
                 </h2>
               </div>
-            </Reveal>
+            </RevealMask>
             <Reveal delay={0.1}>
               <p className="text-muted-foreground text-base leading-relaxed mb-5">
                 Motocenter reúne taller, mantenimiento, repuestos y accesorios en un mismo lugar. La
