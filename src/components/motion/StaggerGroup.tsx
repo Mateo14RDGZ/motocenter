@@ -10,7 +10,7 @@ export function StaggerGroup({ children, className }: { children: ReactNode; cla
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, margin: '-80px' }}
+      viewport={{ once: false, amount: 0.2 }}
       variants={staggerContainer}
     >
       {children}

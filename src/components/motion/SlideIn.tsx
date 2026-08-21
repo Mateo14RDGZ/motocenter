@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef, type ReactNode } from 'react';
 
 interface SlideInProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface SlideInProps {
   distance?: number;
 }
 
-/** Entra deslizando desde un costado (no de abajo hacia arriba como Reveal). */
+/** Entra deslizando desde un costado, atado a la posición del scroll (ver Reveal.tsx). */
 export default function SlideIn({
   children,
   className,
@@ -20,22 +20,25 @@ export default function SlideIn({
   distance = 28,
 }: SlideInProps) {
   const reduceMotion = useReducedMotion();
-  const x = direction === 'left' ? -distance : distance;
+  const ref = useRef<HTMLDivElement>(null);
+  const x0 = direction === 'left' ? -distance : distance;
 
-  const variants: Variants = {
-    hidden: { opacity: 0, x: reduceMotion ? 0 : x },
-    visible: { opacity: 1, x: 0 },
-  };
+  const start = 94 - delay * 20;
+  const end = 60 - delay * 20;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: [`start ${start}%`, `start ${end}%`],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const x = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : x0, 0]);
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: '-60px' }}
-      variants={variants}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <motion.div ref={ref} className={className} style={{ opacity, x }}>
       {children}
     </motion.div>
   );

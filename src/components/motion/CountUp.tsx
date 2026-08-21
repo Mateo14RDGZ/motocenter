@@ -13,7 +13,7 @@ export default function CountUp({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: false, margin: '-40px' });
+  const inView = useInView(ref, { once: false, amount: 0.4 });
   const [value, setValue] = useState(0);
 
   useEffect(() => {

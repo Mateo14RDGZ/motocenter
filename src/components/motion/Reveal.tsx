@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion';
+import { useRef, type ReactNode } from 'react';
 
 interface RevealProps {
   children: ReactNode;
@@ -11,7 +11,14 @@ interface RevealProps {
   as?: 'div' | 'span';
 }
 
-/** Entrada suave al hacer scroll, respeta prefers-reduced-motion. */
+/**
+ * Entrada/salida atada directamente a la posición del scroll (no a un
+ * IntersectionObserver con whileInView). El navegador puede retrasar la entrega
+ * de los eventos de intersección durante un scroll suave, lo que hacía que la
+ * animación de salida arrancara recién cuando el elemento ya estaba fuera de
+ * pantalla. Con scroll-linked el valor se recalcula en cada frame de scroll,
+ * así que se ve en tiempo real subiendo y bajando, sin demora.
+ */
 export default function Reveal({
   children,
   className,
@@ -20,23 +27,26 @@ export default function Reveal({
   as = 'div',
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement | HTMLSpanElement>(null);
 
-  const variants: Variants = {
-    hidden: { opacity: 0, y: reduceMotion ? 0 : y },
-    visible: { opacity: 1, y: 0 },
-  };
+  const start = 92 - delay * 30;
+  const end = 42 - delay * 30;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: [`start ${start}%`, `start ${end}%`],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const translateY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : y, 0]);
 
   const MotionTag = as === 'span' ? motion.span : motion.div;
 
+  if (reduceMotion) {
+    return <MotionTag className={className}>{children}</MotionTag>;
+  }
+
   return (
-    <MotionTag
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: '-80px' }}
-      variants={variants}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <MotionTag ref={ref as never} className={className} style={{ opacity, y: translateY }}>
       {children}
     </MotionTag>
   );
