@@ -23,7 +23,7 @@ export default function AboutSection() {
           {/* Text Side */}
           <div className="lg:w-1/2">
             <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">03 — Sobre Motocenter</span>
+              <span className="eyebrow text-primary mb-3 block">04 — Sobre Motocenter</span>
               <div className="flex items-start gap-5 mb-6">
                 <CountUp
                   to={3}

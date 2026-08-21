@@ -12,13 +12,7 @@ const WA_LINK = buildWhatsAppLink(
 
 interface Category {
   code: string;
-  icon:
-    | 'CogIcon'
-    | 'StopCircleIcon'
-    | 'LightBulbIcon'
-    | 'FunnelIcon'
-    | 'BeakerIcon'
-    | 'ShieldCheckIcon';
+  icon: 'CogIcon' | 'StopCircleIcon' | 'LightBulbIcon' | 'FunnelIcon' | 'BeakerIcon';
   label: string;
   description: string;
 }
@@ -54,12 +48,6 @@ const categories: Category[] = [
     label: 'Aceites',
     description: 'Lubricantes para motor y transmisión.',
   },
-  {
-    code: 'EQ',
-    icon: 'ShieldCheckIcon',
-    label: 'Accesorios',
-    description: 'Equipamiento y protección.',
-  },
 ];
 
 export default function PartsSection() {
@@ -82,8 +70,8 @@ export default function PartsSection() {
           </RevealMask>
           <RevealMask delay={0.1}>
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-sm md:text-right">
-              Repuestos y accesorios que conseguimos y usamos en cada reparación. Tocá una categoría
-              para ver el detalle.
+              Los repuestos mecánicos que conseguimos y usamos en cada reparación. Tocá una
+              categoría para ver el detalle.
             </p>
           </RevealMask>
         </div>

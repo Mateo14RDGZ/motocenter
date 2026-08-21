@@ -27,7 +27,7 @@ export default function LocationSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-24 md:py-32 min-h-[560px] flex items-end">
         <div className="w-full max-w-md">
           <RevealMask>
-            <span className="eyebrow text-primary mb-3 block">06 — Encontranos</span>
+            <span className="eyebrow text-primary mb-3 block">07 — Encontranos</span>
             <h2 className="section-title text-paper mb-6">Dónde estamos</h2>
           </RevealMask>
 

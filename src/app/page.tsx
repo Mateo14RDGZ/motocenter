@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import HeroSection from '@/app/components/HeroSection';
 import ServicesSection from '@/app/components/ServicesSection';
 import PartsSection from '@/app/components/PartsSection';
+import AccessoriesSection from '@/app/components/AccessoriesSection';
 import AboutSection from '@/app/components/AboutSection';
 import GallerySection from '@/app/components/GallerySection';
 import HoursSection from '@/app/components/HoursSection';
@@ -18,6 +19,7 @@ export default function HomePage() {
       <HeroSection />
       <ServicesSection />
       <PartsSection />
+      <AccessoriesSection />
       <AboutSection />
       <GallerySection />
       <HoursSection />
