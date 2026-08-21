@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 interface SplitTextProps {
   text: string;
@@ -9,7 +9,20 @@ interface SplitTextProps {
   as?: 'h1' | 'h2';
 }
 
-/** Anima cada palabra por separado con un spring, en vez de fade+slide del bloque entero. */
+const wordVariants: Variants = {
+  hidden: { y: '110%', rotate: 4 },
+  visible: {
+    y: '0%',
+    rotate: 0,
+    transition: { type: 'spring', stiffness: 220, damping: 24 },
+  },
+};
+
+/**
+ * Anima cada palabra por separado con un spring. Un solo IntersectionObserver en el
+ * contenedor orquesta el stagger de las palabras (en vez de uno por palabra, que es
+ * frágil ante layout shifts por carga de fuentes y puede dejar alguna palabra oculta).
+ */
 export default function SplitText({ text, className, delay = 0, as = 'h1' }: SplitTextProps) {
   const reduceMotion = useReducedMotion();
   const words = text.split(' ');
@@ -20,21 +33,25 @@ export default function SplitText({ text, className, delay = 0, as = 'h1' }: Spl
     return <StaticTag className={className}>{text}</StaticTag>;
   }
 
+  const container: Variants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.07, delayChildren: delay },
+    },
+  };
+
   return (
-    <MotionTag className={className} aria-label={text}>
+    <MotionTag
+      className={className}
+      aria-label={text}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.2 }}
+      variants={container}
+    >
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden align-top mr-[0.28em] last:mr-0">
-          <motion.span
-            className="inline-block"
-            initial={{ y: '110%', rotate: 4 }}
-            animate={{ y: '0%', rotate: 0 }}
-            transition={{
-              type: 'spring',
-              stiffness: 220,
-              damping: 24,
-              delay: delay + i * 0.07,
-            }}
-          >
+          <motion.span className="inline-block" variants={wordVariants}>
             {word}
           </motion.span>
         </span>
