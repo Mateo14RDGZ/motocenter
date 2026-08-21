@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Unbounded } from 'next/font/google';
 import '../styles/tailwind.css';
-import { ADDRESS, WA_NUMBER } from '@/config/business';
+import { ADDRESS, WA_NUMBER, MAPS_LAT, MAPS_LNG, MAPS_LINK } from '@/config/business';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -91,6 +91,12 @@ export default function RootLayout({
               },
               telephone: `+598${WA_NUMBER.slice(3)}`,
               url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+              hasMap: MAPS_LINK,
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: MAPS_LAT,
+                longitude: MAPS_LNG,
+              },
               openingHoursSpecification: [
                 {
                   '@type': 'OpeningHoursSpecification',

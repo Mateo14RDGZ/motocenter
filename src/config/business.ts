@@ -26,11 +26,14 @@ export const ADDRESS = {
   full: 'Uruguay 923, Trinidad, Flores',
 };
 
-export const MAPS_LINK = `https://maps.google.com/?q=${encodeURIComponent(`${ADDRESS.street} ${ADDRESS.locality} ${ADDRESS.region} Uruguay`)}`;
+// Coordenadas y ficha reales de Motocenter en Google Maps (provistas por el cliente)
+export const MAPS_LAT = -33.522601;
+export const MAPS_LNG = -56.9040499;
 
-// TODO: reemplazar por el embed real de Google Maps una vez confirmada la dirección exacta
-export const MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.9!2d-56.8999!3d-33.5416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDMyJzI5LjgiUyA1NsKwNTMnNTkuNiJX!5e0!3m2!1ses!2suy!4v1234567890';
+export const MAPS_LINK =
+  'https://www.google.com/maps/place/Motocenter/@-33.522601,-56.9040499,17z/data=!3m1!4b1!4m6!3m5!1s0x95a6a1fa02f7ad3d:0xbcc82647f6d39b7c!8m2!3d-33.522601!4d-56.9040499!16s%2Fg%2F11jyfzgrmt';
+
+export const MAPS_EMBED = `https://maps.google.com/maps?q=${MAPS_LAT},${MAPS_LNG}&z=16&output=embed`;
 
 // TODO: confirmar horarios reales de atención
 export interface DaySchedule {
