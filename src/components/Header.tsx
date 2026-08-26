@@ -44,9 +44,12 @@ export default function Header() {
           scrolled ? 'bg-ink/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 md:h-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 md:h-28">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 min-w-0 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0"
+          >
             <AppLogo
               src="/assets/images/motocenter-logo-header.png"
               size={88}
@@ -83,7 +86,7 @@ export default function Header() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-paper hover:bg-white/10 transition-[background-color,transform] duration-150 active:scale-90"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-paper hover:bg-white/10 transition-[background-color,transform] duration-150 active:scale-90 ml-auto"
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
           >
