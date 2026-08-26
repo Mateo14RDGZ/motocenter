@@ -106,7 +106,7 @@ export default function Footer() {
             </span>
             <span
               aria-hidden="true"
-              className="font-signature italic tracking-tight"
+              className="font-signature mr14-signature italic tracking-tight"
               style={{ fontSize: '16px', color: '#64748b' }}
             >
               MƦ14
