@@ -75,32 +75,39 @@ export default function GallerySection() {
       </div>
 
       {/* Filmstrip: scroll horizontal con snap, se arrastra con el dedo/mouse */}
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pl-4 pr-4 sm:pl-6 sm:pr-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {galleryItems.map((item, i) => (
-          <ScaleIn
-            key={item.label}
-            delay={i * 0.04}
-            className="flex-shrink-0 snap-center w-[78vw] sm:w-[45vw] md:w-[32vw] lg:w-[28vw]"
-          >
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
-              <AppImage
-                src={item.image}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 78vw, 30vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
-              <span className="absolute bottom-4 left-4 text-sm font-700 text-white uppercase tracking-wide">
-                {item.label}
-              </span>
-            </div>
-          </ScaleIn>
-        ))}
+      <div className="relative">
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pl-4 pr-4 sm:pl-6 sm:pr-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {galleryItems.map((item, i) => (
+            <ScaleIn
+              key={item.label}
+              delay={i * 0.04}
+              className="flex-shrink-0 snap-center w-[78vw] sm:w-[45vw] md:w-[32vw] lg:w-[28vw]"
+            >
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
+                <AppImage
+                  src={item.image}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 78vw, 30vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
+                <span className="absolute bottom-4 left-4 text-sm font-700 text-white uppercase tracking-wide">
+                  {item.label}
+                </span>
+              </div>
+            </ScaleIn>
+          ))}
+        </div>
+        {/* Degradé en el borde derecho: pista de que hay más contenido para scrollear */}
+        <div
+          className="absolute right-0 top-0 bottom-4 w-10 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"
+          aria-hidden="true"
+        />
       </div>
 
       {/* Progreso + puntos de navegación */}

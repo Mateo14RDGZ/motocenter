@@ -110,7 +110,7 @@ export default function HoursSection() {
           </div>
 
           {/* Schedule Table */}
-          <div className="lg:w-3/5 w-full">
+          <div className="lg:w-3/5 w-full pb-16 lg:pb-0">
             <StaggerGroup className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden">
               {schedule.map((item) => {
                 const isToday = dayNames[now.day] === item.day;

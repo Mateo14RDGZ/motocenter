@@ -109,7 +109,7 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
-              className="absolute top-16 left-0 right-0 bg-ink border-b border-white/10 p-6"
+              className="absolute top-16 left-0 right-0 bg-ink border-b border-white/10 p-6 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain"
               initial={{ y: -16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -16, opacity: 0 }}

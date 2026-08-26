@@ -133,7 +133,7 @@ export default function HeroSection() {
       <div className="relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="bg-card rounded-t-2xl shadow-2xl px-4 py-4 md:px-8 md:py-5">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-border">
               {stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-3 md:px-6 first:pl-0 last:pr-0">
                   <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -143,9 +143,7 @@ export default function HeroSection() {
                     <p className="text-xs text-muted-foreground font-600 uppercase tracking-wide leading-none mb-0.5">
                       {stat.label}
                     </p>
-                    <p className="text-sm font-700 text-foreground leading-snug truncate">
-                      {stat.value}
-                    </p>
+                    <p className="text-sm font-700 text-foreground leading-snug">{stat.value}</p>
                   </div>
                 </div>
               ))}

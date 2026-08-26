@@ -69,7 +69,7 @@ export default function AccessoriesSection() {
             <button
               key={g}
               onClick={() => setFilter(g)}
-              className={`relative px-4 py-2 rounded-full text-sm font-600 transition-colors ${
+              className={`relative px-4 py-2.5 min-h-[44px] flex items-center rounded-full text-sm font-600 transition-colors ${
                 filter === g
                   ? 'text-primary-foreground'
                   : 'text-muted-foreground hover:text-foreground'
