@@ -1,54 +1,42 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Icon from '@/components/ui/AppIcon';
+import { WA_LINK } from '@/config/business';
 
 export default function NotFound() {
   const router = useRouter();
 
-  const handleGoHome = () => {
-    router?.push('/');
-  };
-
-  const handleGoBack = () => {
-    if (typeof window !== 'undefined') {
-      window.history?.back();
-    }
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
-      <div className="text-center max-w-md">
-        <div className="flex justify-center mb-6">
-          <div className="relative">
-            <h1 className="text-9xl font-bold text-primary opacity-20">404</h1>
-          </div>
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-ink relative overflow-hidden p-4">
+      <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 mechanic-line opacity-20 pointer-events-none" />
 
-        <h2 className="text-2xl font-medium text-onBackground mb-2">Página no encontrada</h2>
-        <p className="text-onBackground/70 mb-8">
-          La página que buscás no existe. Volvamos al inicio.
-        </p>
+      <motion.div
+        className="relative text-center max-w-md"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <span className="spec-number block text-8xl md:text-9xl text-primary leading-none mb-4">
+          404
+        </span>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={handleGoBack}
-            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200"
-          >
-            <Icon name="ArrowLeftIcon" size={16} />
-            Volver
-          </button>
+        <h1 className="font-display font-600 text-2xl text-paper mb-2">Página no encontrada</h1>
+        <p className="text-paper/60 mb-8">La página que buscás no existe. Volvamos al inicio.</p>
 
-          <button
-            onClick={handleGoHome}
-            className="inline-flex items-center justify-center gap-2 border border-border bg-background text-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
-          >
-            <Icon name="HomeIcon" size={16} />
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button onClick={() => router.push('/')} className="btn-primary">
+            <Icon name="HomeIcon" size={18} />
             Ir al inicio
           </button>
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={18} variant="solid" />
+            Escribinos
+          </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

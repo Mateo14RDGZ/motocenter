@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ScrollProgress from '@/components/motion/ScrollProgress';
+import SectionDots from '@/components/SectionDots';
 import HeroSection from '@/app/components/HeroSection';
 import ServicesSection from '@/app/components/ServicesSection';
 import PartsSection from '@/app/components/PartsSection';
@@ -16,6 +18,8 @@ import FloatingWhatsApp from '@/app/components/FloatingWhatsApp';
 export default function HomePage() {
   return (
     <main>
+      <ScrollProgress />
+      <SectionDots />
       <Header />
       <HeroSection />
       <ServicesSection />

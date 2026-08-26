@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
 import Marquee from '@/components/motion/Marquee';
@@ -32,21 +33,34 @@ const tickerItems = [
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+
   return (
-    <section className="relative min-h-screen flex flex-col bg-ink overflow-hidden">
-      {/* Background image, cropped to the right two-thirds */}
-      <div className="absolute inset-y-0 right-0 w-full md:w-2/3 z-0">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex flex-col bg-ink overflow-hidden"
+    >
+      {/* Background image, cropped to the right two-thirds, con parallax al scrollear */}
+      <motion.div
+        className="absolute inset-y-0 right-0 w-full md:w-2/3 z-0"
+        style={{ y: parallaxY }}
+      >
         <AppImage
           src="https://images.unsplash.com/photo-1766170507513-ef249e0ca426"
           alt="Taller de motos pequeño y desordenado, con motos y repuestos, ambiente de barrio"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10 md:from-ink md:via-ink/50 md:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
