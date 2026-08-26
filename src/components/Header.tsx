@@ -48,13 +48,10 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
             <AppLogo
-              size={34}
+              size={44}
               className="flex-shrink-0 transition-transform duration-200 group-active:scale-90"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             />
-            <span className="font-display font-700 text-base tracking-tight uppercase text-paper">
-              Motocenter
-            </span>
           </Link>
 
           {/* Desktop Nav */}

@@ -14,13 +14,8 @@ export default function Footer() {
       >
         {/* Brand */}
         <div className="flex flex-col items-center gap-2 mb-6">
-          <AppLogo size={40} className="opacity-90" />
-          <div>
-            <span className="font-display font-700 text-base uppercase tracking-tight text-secondary-foreground block">
-              Motocenter
-            </span>
-            <span className="text-xs text-secondary-foreground/50">Trinidad, Flores</span>
-          </div>
+          <AppLogo size={64} className="opacity-95" />
+          <span className="text-xs text-secondary-foreground/50">Trinidad, Flores</span>
         </div>
 
         {/* Links */}
