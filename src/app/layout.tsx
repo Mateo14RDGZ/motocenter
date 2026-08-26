@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, Unbounded, Bodoni_Moda } from 'next/font/google';
+import { Plus_Jakarta_Sans, Unbounded } from 'next/font/google';
 import '../styles/tailwind.css';
 import { ADDRESS, WA_NUMBER, MAPS_LAT, MAPS_LNG, MAPS_LINK } from '@/config/business';
 
@@ -15,15 +15,6 @@ const unbounded = Unbounded({
   subsets: ['latin'],
   weight: ['500', '600', '700', '800', '900'],
   variable: '--font-unbounded',
-  display: 'swap',
-});
-
-// Usada solo para el logotipo "MR14" en la firma del footer
-const bodoniModa = Bodoni_Moda({
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  style: ['italic'],
-  variable: '--font-signature',
   display: 'swap',
 });
 
@@ -80,10 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es"
-      className={`${plusJakartaSans.variable} ${unbounded.variable} ${bodoniModa.variable}`}
-    >
+    <html lang="es" className={`${plusJakartaSans.variable} ${unbounded.variable}`}>
       <head>
         <script
           type="application/ld+json"

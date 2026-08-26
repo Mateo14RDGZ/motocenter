@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fuente del logotipo "MƦ14" en la firma del footer. Archivo de pago (Fenotype) —
+   ver src/fonts/README.md para cómo agregar el .woff2 real. Con el archivo ausente,
+   el navegador cae al fallback declarado abajo (Playfair Display / Georgia). */
+@font-face {
+  font-family: 'Mazius Display';
+  src: url('/fonts/MaziusDisplay-ExtraItalicBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Paleta "Taller Trinidad": papel cálido + tinta + naranja señal como único acento */
   --background: #f5f1e8;
@@ -93,7 +104,8 @@
   }
 
   .font-signature {
-    font-family: var(--font-signature), 'Bodoni Moda', serif;
+    font-family: 'Mazius Display', 'Playfair Display', Georgia, serif;
+    font-weight: 800;
   }
 
   .hero-title {

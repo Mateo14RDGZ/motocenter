@@ -91,16 +91,25 @@ export default function Footer() {
             © {new Date().getFullYear()} Motocenter — {ADDRESS.full} · {DISPLAY_PHONE}
           </span>
           <a
-            href="https://www.mateordgz.dev"
+            href="https://www.mateordgz.dev/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-baseline gap-2 text-secondary-foreground/50 hover:text-secondary-foreground/80 transition-colors"
+            aria-label="Desarrollado por MR14"
+            className="inline-flex items-baseline gap-[6px] hover:opacity-80 transition-opacity duration-150"
           >
-            <span className="text-[10px] font-600 uppercase tracking-[0.25em]">
+            <span
+              aria-hidden="true"
+              className="uppercase font-600 tracking-[0.12em]"
+              style={{ fontSize: '10px', color: '#94a3b8' }}
+            >
               Desarrollado por
             </span>
-            <span className="font-signature italic font-900 text-xl tracking-tight normal-case">
-              MR14
+            <span
+              aria-hidden="true"
+              className="font-signature italic tracking-tight"
+              style={{ fontSize: '16px', color: '#64748b' }}
+            >
+              MƦ14
             </span>
           </a>
         </div>
