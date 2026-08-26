@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: '/assets/images/app_logo.png',
+        url: '/assets/images/motocenter-logo.png',
         width: 1200,
         height: 630,
         alt: 'Motocenter Trinidad - Taller mecánico de motos',

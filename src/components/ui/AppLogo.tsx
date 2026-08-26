@@ -13,7 +13,7 @@ interface AppLogoProps {
 }
 
 const AppLogo = memo(function AppLogo({
-  src = '/assets/images/motocenter-logo.svg',
+  src = '/assets/images/motocenter-logo.png',
   iconName = 'SparklesIcon',
   size = 64,
   className = '',
@@ -33,10 +33,11 @@ const AppLogo = memo(function AppLogo({
       {src ? (
         <AppImage
           src={src}
-          alt="Logo"
-          width={size}
+          alt="Motocenter"
+          width={size * 1.5}
           height={size}
-          className="flex-shrink-0"
+          className="flex-shrink-0 object-contain"
+          style={{ width: 'auto', height: size }}
           priority={true}
           unoptimized={src.endsWith('.svg')}
         />
