@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion';
-import { useRef, type ReactNode } from 'react';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { type ReactNode } from 'react';
 
 interface RevealProps {
   children: ReactNode;
@@ -12,12 +12,9 @@ interface RevealProps {
 }
 
 /**
- * Entrada/salida atada directamente a la posición del scroll (no a un
- * IntersectionObserver con whileInView). El navegador puede retrasar la entrega
- * de los eventos de intersección durante un scroll suave, lo que hacía que la
- * animación de salida arrancara recién cuando el elemento ya estaba fuera de
- * pantalla. Con scroll-linked el valor se recalcula en cada frame de scroll,
- * así que se ve en tiempo real subiendo y bajando, sin demora.
+ * Animación de entrada única, disparada por IntersectionObserver (whileInView
+ * + viewport once). No vuelve a animar al scrollear hacia arriba y no recalcula
+ * nada en cada frame de scroll, así el hilo principal queda libre.
  */
 export default function Reveal({
   children,
@@ -27,18 +24,6 @@ export default function Reveal({
   as = 'div',
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement | HTMLSpanElement>(null);
-
-  const start = 92 - delay * 30;
-  const end = 42 - delay * 30;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: [`start ${start}%`, `start ${end}%`],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const translateY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : y, 0]);
-
   const MotionTag = as === 'span' ? motion.span : motion.div;
 
   if (reduceMotion) {
@@ -46,7 +31,13 @@ export default function Reveal({
   }
 
   return (
-    <MotionTag ref={ref as never} className={className} style={{ opacity, y: translateY }}>
+    <MotionTag
+      className={className}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
       {children}
     </MotionTag>
   );

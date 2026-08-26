@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useRef, type ReactNode } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { type ReactNode } from 'react';
 
 interface ScaleInProps {
   children: ReactNode;
@@ -9,27 +9,22 @@ interface ScaleInProps {
   delay?: number;
 }
 
-/** Entra con un "pop" de escala, atado a la posición del scroll (ver Reveal.tsx). */
+/** Entra con un "pop" de escala, una sola vez al aparecer en pantalla. */
 export default function ScaleIn({ children, className, delay = 0 }: ScaleInProps) {
   const reduceMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-
-  const start = 96 - delay * 20;
-  const end = 62 - delay * 20;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: [`start ${start}%`, `start ${end}%`],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 1 : 0.85, 1]);
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div ref={ref} className={className} style={{ opacity, scale }}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, scale: 0.85 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+      transition={{ duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
       {children}
     </motion.div>
   );

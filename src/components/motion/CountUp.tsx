@@ -13,14 +13,11 @@ export default function CountUp({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: false, amount: 0.4 });
+  const inView = useInView(ref, { once: true, amount: 0.4 });
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!inView) {
-      setValue(0);
-      return;
-    }
+    if (!inView) return;
     const controls = animate(0, to, {
       duration,
       ease: [0.16, 1, 0.3, 1],

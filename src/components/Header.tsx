@@ -44,11 +44,11 @@ export default function Header() {
           scrolled ? 'bg-ink/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-18">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
             <AppLogo
-              size={44}
+              size={68}
               className="flex-shrink-0 transition-transform duration-200 group-active:scale-90"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             />
@@ -106,7 +106,7 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
-              className="absolute top-16 left-0 right-0 bg-ink border-b border-white/10 p-6 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain"
+              className="absolute top-20 left-0 right-0 bg-ink border-b border-white/10 p-6 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain"
               initial={{ y: -16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -16, opacity: 0 }}

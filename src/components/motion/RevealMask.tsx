@@ -1,11 +1,12 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useRef, type ReactNode } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { type ReactNode } from 'react';
 
 /**
- * Revela el contenido con un barrido (clip-path), atado a la posición del scroll
- * (ver Reveal.tsx) para que se vea en tiempo real tanto al bajar como al subir.
+ * Revela el contenido con un barrido (clip-path) una sola vez al entrar en
+ * pantalla (whileInView + viewport once). No vuelve a animar al scrollear
+ * hacia arriba.
  */
 export default function RevealMask({
   children,
@@ -17,20 +18,15 @@ export default function RevealMask({
   delay?: number;
 }) {
   const reduceMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-
-  const start = 95 - delay * 20;
-  const end = 65 - delay * 20;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: [`start ${start}%`, `start ${end}%`],
-  });
-
-  const clipPath = useTransform(scrollYProgress, [0, 1], ['inset(0 0 100% 0)', 'inset(0 0 0% 0)']);
 
   return (
     <div className={`overflow-hidden ${className ?? ''}`}>
-      <motion.div ref={ref} style={reduceMotion ? undefined : { clipPath }}>
+      <motion.div
+        initial={reduceMotion ? undefined : { clipPath: 'inset(0 0 100% 0)' }}
+        whileInView={reduceMotion ? undefined : { clipPath: 'inset(0 0 0% 0)' }}
+        viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+        transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
         {children}
       </motion.div>
     </div>

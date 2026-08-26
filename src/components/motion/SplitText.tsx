@@ -44,7 +44,7 @@ export default function SplitText({ text, className, delay = 0, as = 'h1' }: Spl
       aria-label={text}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={container}
     >
       {words.map((word, i) => (
