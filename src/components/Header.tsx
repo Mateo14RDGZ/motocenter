@@ -48,7 +48,8 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
             <AppLogo
-              size={68}
+              src="/assets/images/motocenter-logo-header.png"
+              size={56}
               className="flex-shrink-0 transition-transform duration-200 group-active:scale-90"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             />

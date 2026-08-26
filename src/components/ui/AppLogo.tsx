@@ -34,7 +34,7 @@ const AppLogo = memo(function AppLogo({
         <AppImage
           src={src}
           alt="Motocenter"
-          width={size * 1.5}
+          width={size * 2.5}
           height={size}
           className="flex-shrink-0 object-contain"
           style={{ width: 'auto', height: size }}
