@@ -23,8 +23,7 @@ export default function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar Motocenter por WhatsApp"
-        className="flex items-center gap-2.5 bg-green-700 text-white rounded-full shadow-xl hover:bg-green-800 active:scale-[0.96] transition-[background-color,transform] duration-150 whatsapp-pulse group"
-        style={{ padding: '14px 20px 14px 16px' }}
+        className="flex items-center justify-center sm:justify-start gap-2.5 w-12 h-12 sm:w-auto sm:h-auto p-0 sm:py-3.5 sm:pl-4 sm:pr-5 bg-green-700 text-white rounded-full shadow-xl hover:bg-green-800 active:scale-[0.96] transition-[background-color,transform] duration-150 whatsapp-pulse group"
       >
         {/* WhatsApp icon via SVG */}
         <svg
