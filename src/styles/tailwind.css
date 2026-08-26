@@ -14,14 +14,14 @@
 }
 
 :root {
-  /* Paleta "Taller Trinidad": papel cálido + tinta + naranja señal como único acento */
+  /* Paleta "Taller Trinidad": papel cálido + tinta + rojo Motocenter como único acento */
   --background: #f5f1e8;
   --foreground: #14161a;
-  --primary: #ff5a1f;
+  --primary: #dc2626;
   --primary-foreground: #14161a;
   --secondary: #14161a;
   --secondary-foreground: #f5f1e8;
-  --accent: #ff5a1f;
+  --accent: #dc2626;
   --accent-foreground: #14161a;
   --muted: #e8e1d1;
   --muted-foreground: #6b6455;
@@ -29,7 +29,7 @@
   --card-foreground: #14161a;
   --border: #ddd4bf;
   --input: #ddd4bf;
-  --ring: #ff5a1f;
+  --ring: #dc2626;
   --radius: 0.625rem;
   --font-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
   --font-display: var(--font-unbounded), 'Unbounded', sans-serif;
@@ -194,8 +194,8 @@
       90deg,
       transparent,
       transparent 3px,
-      rgba(255, 90, 31, 0.14) 3px,
-      rgba(255, 90, 31, 0.14) 4px
+      rgba(220, 38, 38, 0.14) 3px,
+      rgba(220, 38, 38, 0.14) 4px
     );
   }
 
@@ -252,7 +252,7 @@
       background-color 0.2s ease,
       transform 0.16s var(--ease-out),
       box-shadow 0.2s ease;
-    box-shadow: 0 4px 16px rgba(255, 90, 31, 0.35);
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
     text-decoration: none;
     white-space: nowrap;
     min-height: 52px;
@@ -260,9 +260,9 @@
 
   @media (hover: hover) and (pointer: fine) {
     .btn-primary:hover {
-      background-color: #ff7040;
+      background-color: #ef4444;
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(255, 90, 31, 0.45);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.45);
     }
   }
 

@@ -1,0 +1,60 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="white"/>
+
+  <!-- Left Wheel -->
+  <circle cx="100" cy="180" r="45" fill="none" stroke="#dc2626" stroke-width="8"/>
+  <circle cx="100" cy="180" r="8" fill="#dc2626"/>
+
+  <!-- Right Wheel -->
+  <circle cx="320" cy="180" r="45" fill="none" stroke="#dc2626" stroke-width="8"/>
+  <circle cx="320" cy="180" r="8" fill="#dc2626"/>
+
+  <!-- Motorcycle Body - Blue -->
+  <g fill="#14161a">
+    <!-- Frame -->
+    <path d="M 140 160 L 160 120 L 180 125 L 175 165 Z" fill="#14161a"/>
+    <path d="M 175 165 L 180 125 L 210 130 L 200 170 Z" fill="#14161a"/>
+
+    <!-- Seat -->
+    <ellipse cx="185" cy="110" rx="25" ry="20" fill="#14161a"/>
+
+    <!-- Handlebars -->
+    <path d="M 190 95 L 180 85" stroke="#14161a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 190 95 L 200 85" stroke="#14161a" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- Rider Body -->
+    <circle cx="185" cy="65" r="18" fill="#14161a"/>
+
+    <!-- Rider Legs -->
+    <path d="M 175 82 L 165 110" stroke="#14161a" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M 195 82 L 205 110" stroke="#14161a" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+    <!-- Rider Arms -->
+    <path d="M 172 65 L 155 75" stroke="#14161a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 198 65 L 215 75" stroke="#14161a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Red Engine/Muffler Detail -->
+  <rect x="220" y="155" width="60" height="35" rx="5" fill="#dc2626"/>
+
+  <!-- Center Connection (Frame) -->
+  <line x1="100" y1="180" x2="320" y2="180" stroke="#14161a" stroke-width="6"/>
+  <path d="M 150 170 Q 210 130 250 170" stroke="#14161a" stroke-width="5" fill="none"/>
+
+  <!-- Text Section -->
+  <g>
+    <!-- Red Banner Background -->
+    <rect x="50" y="220" width="300" height="50" rx="4" fill="#dc2626"/>
+
+    <!-- White Text on Red Banner -->
+    <text x="200" y="247" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+      Servicio Integral para tu moto
+    </text>
+
+    <!-- Blue Text Below -->
+    <text x="200" y="275" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#14161a" text-anchor="middle">
+      REPUESTOS Y ACCESORIOS
+    </text>
+  </g>
+</svg>
