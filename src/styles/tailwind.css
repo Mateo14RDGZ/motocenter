@@ -92,6 +92,10 @@
     font-family: var(--font-display);
   }
 
+  .font-signature {
+    font-family: var(--font-signature), 'Bodoni Moda', serif;
+  }
+
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.6rem, 8.5vw, 6.2rem);

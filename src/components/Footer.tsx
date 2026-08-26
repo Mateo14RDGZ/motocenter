@@ -99,7 +99,7 @@ export default function Footer() {
             <span className="text-[10px] font-600 uppercase tracking-[0.25em]">
               Desarrollado por
             </span>
-            <span className="font-display italic font-800 text-lg tracking-tight normal-case">
+            <span className="font-signature italic font-900 text-xl tracking-tight normal-case">
               MR14
             </span>
           </a>
