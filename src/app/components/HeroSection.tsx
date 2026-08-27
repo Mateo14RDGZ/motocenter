@@ -7,7 +7,6 @@ import Icon from '@/components/ui/AppIcon';
 import Marquee from '@/components/motion/Marquee';
 import SplitText from '@/components/motion/SplitText';
 import Magnetic from '@/components/motion/Magnetic';
-import GoogleRatingBadge from '@/components/GoogleRatingBadge';
 import { WA_LINK } from '@/config/business';
 
 const stats = [
@@ -78,7 +77,6 @@ export default function HeroSection() {
                 <Icon name="MapPinIcon" size={12} variant="solid" className="text-primary flex-shrink-0" />
                 <span className="eyebrow">Trinidad · Flores</span>
               </span>
-              <GoogleRatingBadge className="hang-tag text-paper/85 hover:border-paper/50 transition-colors" />
               <span className="stamp-badge font-scrawl text-primary text-xl md:text-2xl px-5 py-2 leading-none select-none rotate-2">
                 De toda la vida
               </span>

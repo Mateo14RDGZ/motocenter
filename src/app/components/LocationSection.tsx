@@ -10,12 +10,9 @@ export default function LocationSection() {
   return (
     <section id="ubicacion" className="py-20 md:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <RevealMask className="mb-10 md:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <span className="eyebrow text-primary mb-3 block">09 — Encontranos</span>
-            <h2 className="section-title text-foreground">Dónde estamos</h2>
-          </div>
-          <GoogleRatingBadge className="text-foreground bg-card border border-border rounded-full px-3.5 py-2 shadow-sm self-start sm:self-auto" />
+        <RevealMask className="mb-10 md:mb-14">
+          <span className="eyebrow text-primary mb-3 block">09 — Encontranos</span>
+          <h2 className="section-title text-foreground">Dónde estamos</h2>
         </RevealMask>
 
         {/* Mapa grande con ficha flotante encima, tipo "tarjeta de ubicación" */}
@@ -94,6 +91,10 @@ export default function LocationSection() {
             </div>
           </div>
         </ScaleIn>
+
+        <Reveal delay={0.15} className="flex justify-center mt-6">
+          <GoogleRatingBadge className="text-foreground bg-card border border-border rounded-full px-3.5 py-2 shadow-sm" />
+        </Reveal>
       </div>
     </section>
   );
