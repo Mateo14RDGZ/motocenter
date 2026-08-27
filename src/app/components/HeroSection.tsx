@@ -74,12 +74,12 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: easeOut }}
             >
-              <span className="hang-tag text-paper/80 -rotate-1">
+              <span className="hang-tag text-paper/80">
                 <Icon name="MapPinIcon" size={12} variant="solid" className="text-primary flex-shrink-0" />
                 <span className="eyebrow">Trinidad · Flores</span>
               </span>
-              <GoogleRatingBadge className="hang-tag text-paper/85 rotate-1 hover:border-paper/50 transition-colors" />
-              <span className="stamp-badge font-scrawl text-primary text-xl md:text-2xl px-4 leading-none select-none rotate-2">
+              <GoogleRatingBadge className="hang-tag text-paper/85 hover:border-paper/50 transition-colors" />
+              <span className="stamp-badge font-scrawl text-primary text-xl md:text-2xl px-5 py-2 leading-none select-none rotate-2">
                 Taller de barrio
               </span>
             </motion.div>
