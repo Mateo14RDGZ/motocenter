@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Unbounded, Caveat } from 'next/font/google';
 import '../styles/tailwind.css';
+import SplashScreen from '@/components/SplashScreen';
 import { ADDRESS, WA_NUMBER, MAPS_LAT, MAPS_LNG, MAPS_LINK } from '@/config/business';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -131,7 +132,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={plusJakartaSans.className}>{children}</body>
+      <body className={plusJakartaSans.className}>
+        <SplashScreen />
+        {children}
+      </body>
     </html>
   );
 }

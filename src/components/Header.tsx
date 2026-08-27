@@ -46,7 +46,7 @@ export default function Header() {
             : 'bg-gradient-to-b from-ink/60 via-ink/25 to-transparent'
         }`}
       >
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 md:h-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-28">
           {/* Logo */}
           <Link
             href="/"
@@ -54,7 +54,7 @@ export default function Header() {
           >
             <AppLogo
               src="/assets/images/motocenter-logo-header.png"
-              size={88}
+              size={100}
               className="flex-shrink-0 transition-transform duration-200 group-active:scale-90"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             />
@@ -112,7 +112,7 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
-              className="absolute top-24 left-0 right-0 bg-ink border-b border-white/10 p-6 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain"
+              className="absolute top-28 left-0 right-0 bg-ink border-b border-white/10 p-6 max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain"
               initial={{ y: -16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -16, opacity: 0 }}
