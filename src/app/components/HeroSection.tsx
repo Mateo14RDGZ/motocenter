@@ -74,8 +74,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: easeOut }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-white/5">
-                <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/20 rounded-full bg-white/5">
+                <Icon name="MapPinIcon" size={13} variant="solid" className="text-primary flex-shrink-0" />
                 <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
               </div>
               <GoogleRatingBadge className="px-3 py-1.5 border border-white/20 rounded-full bg-white/5 text-paper hover:bg-white/10 transition-colors" />
