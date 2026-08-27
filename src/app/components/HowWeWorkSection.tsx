@@ -71,7 +71,7 @@ export default function HowWeWorkSection() {
     <section id="como-trabajamos" className="py-20 md:py-24 bg-muted overflow-x-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <RevealMask className="mb-12 md:mb-16 text-center">
-          <span className="eyebrow text-primary mb-3 block">05 — Cómo trabajamos</span>
+          <span className="eyebrow text-primary mb-3 block">06 — Cómo trabajamos</span>
           <h2 className="section-title text-foreground">Así encaramos cada reparación</h2>
         </RevealMask>
 

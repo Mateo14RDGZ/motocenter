@@ -52,7 +52,7 @@ export default function AccessoriesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
           <RevealMask>
-            <span className="eyebrow text-primary mb-3 block">03 — Accesorios</span>
+            <span className="eyebrow text-primary mb-3 block">04 — Accesorios</span>
             <h2 className="section-title text-foreground max-w-xl">De todo un poco para tu moto</h2>
           </RevealMask>
           <RevealMask delay={0.1}>

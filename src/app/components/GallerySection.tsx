@@ -63,7 +63,7 @@ export default function GallerySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-end justify-between gap-4 mb-8 md:mb-10">
           <RevealMask>
-            <span className="eyebrow text-primary mb-3 block">06 — Galería</span>
+            <span className="eyebrow text-primary mb-3 block">07 — Galería</span>
             <h2 className="section-title text-foreground max-w-xl">
               Conocé el taller, las motos y los repuestos
             </h2>

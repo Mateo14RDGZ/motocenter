@@ -10,6 +10,7 @@ import { WA_LINK } from '@/config/business';
 const navLinks = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Repuestos', href: '#repuestos' },
+  { label: 'Marcas', href: '#marcas' },
   { label: 'Accesorios', href: '#accesorios' },
   { label: 'Nosotros', href: '#nosotros' },
   { label: 'Galería', href: '#galeria' },

@@ -22,7 +22,7 @@ export default function AboutSection() {
           {/* Text Side */}
           <div className="lg:w-1/2">
             <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">04 — Sobre Motocenter</span>
+              <span className="eyebrow text-primary mb-3 block">05 — Sobre Motocenter</span>
               <h2 className="section-title text-foreground max-w-md mb-6">
                 Diagnóstico, reparación y el repuesto que hace falta
               </h2>
