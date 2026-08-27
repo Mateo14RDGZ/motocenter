@@ -156,7 +156,7 @@ export default function SplashScreen() {
 
               {/* Pieza 2: el texto CENTER, aparece recién cuando la moto choca */}
               <motion.div
-                className="relative z-0 -mt-[6%] w-[95%] mx-auto"
+                className="relative z-0 -mt-[12%] w-[68%] ml-auto mr-[2%]"
                 initial={reduceMotion ? undefined : { scale: 0.3, opacity: 0 }}
                 animate={
                   reduceMotion
