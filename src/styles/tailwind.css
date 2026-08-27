@@ -126,6 +126,31 @@
     padding: 0.1em 0.2em;
   }
 
+  /* Cartelito colgante tipo etiqueta de repuesto de taller (con "ojal" a la
+     izquierda), en vez de una cápsula/pill genérica */
+  .hang-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    position: relative;
+    padding: 0.4em 0.85em 0.4em 1.5em;
+    border: 1.5px solid rgba(245, 241, 232, 0.28);
+    border-radius: 3px 8px 8px 3px;
+    background: rgba(20, 22, 26, 0.35);
+  }
+
+  .hang-tag::before {
+    content: '';
+    position: absolute;
+    left: 0.55em;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(245, 241, 232, 0.55);
+    transform: translateY(-50%);
+  }
+
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.6rem, 8.5vw, 6.2rem);
