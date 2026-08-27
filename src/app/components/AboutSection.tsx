@@ -1,7 +1,6 @@
 import Icon from '@/components/ui/AppIcon';
 import Reveal from '@/components/motion/Reveal';
 import RevealMask from '@/components/motion/RevealMask';
-import CountUp from '@/components/motion/CountUp';
 import Magnetic from '@/components/motion/Magnetic';
 import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import { WA_LINK, ADDRESS } from '@/config/business';
@@ -24,15 +23,9 @@ export default function AboutSection() {
           <div className="lg:w-1/2">
             <RevealMask>
               <span className="eyebrow text-primary mb-3 block">04 — Sobre Motocenter</span>
-              <div className="flex items-start gap-5 mb-6">
-                <CountUp
-                  to={3}
-                  className="spec-number text-6xl md:text-7xl text-primary leading-none"
-                />
-                <h2 className="section-title text-foreground max-w-md pt-2">
-                  Diagnóstico, reparación y el repuesto que hace falta
-                </h2>
-              </div>
+              <h2 className="section-title text-foreground max-w-md mb-6">
+                Diagnóstico, reparación y el repuesto que hace falta
+              </h2>
             </RevealMask>
             <Reveal delay={0.1}>
               <p className="text-muted-foreground text-base leading-relaxed mb-5">

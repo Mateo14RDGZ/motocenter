@@ -65,7 +65,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex items-center pt-24 pb-16">
+      <div className="relative z-10 flex-1 flex items-center pt-32 md:pt-36 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="max-w-2xl">
             <motion.div

@@ -41,7 +41,9 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          scrolled ? 'bg-ink/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
+          scrolled
+            ? 'bg-ink/95 backdrop-blur-md border-b border-white/10'
+            : 'bg-gradient-to-b from-ink/60 via-ink/25 to-transparent'
         }`}
       >
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 md:h-28">

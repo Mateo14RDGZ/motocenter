@@ -10,85 +10,90 @@ export default function LocationSection() {
   return (
     <section id="ubicacion" className="py-20 md:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-          {/* Info Side */}
-          <div className="lg:w-2/5 w-full">
-            <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">08 — Encontranos</span>
-              <h2 className="section-title text-foreground mb-4">Dónde estamos</h2>
-              <GoogleRatingBadge className="text-foreground mb-6" />
-            </RevealMask>
-
-            <Reveal delay={0.1}>
-              <div className="bg-card border border-border rounded-2xl p-5 mb-4 flex items-start gap-4 shadow-sm">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Icon name="MapPinIcon" size={22} className="text-primary" />
-                </div>
-                <div>
-                  <p className="font-800 text-foreground text-base mb-0.5">{ADDRESS.street}</p>
-                  <p className="text-muted-foreground text-sm">
-                    {ADDRESS.locality}, Departamento de {ADDRESS.region}
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-card border border-border rounded-2xl p-5 mb-6 flex items-center gap-4 shadow-sm">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="PhoneIcon" size={22} className="text-primary" />
-                </div>
-                <div>
-                  <p className="font-800 text-foreground text-base mb-0.5">{DISPLAY_PHONE}</p>
-                  <p className="text-muted-foreground text-sm">WhatsApp y llamadas</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={MAPS_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-dark flex-1 justify-center"
-                >
-                  <Icon name="MapPinIcon" size={18} />
-                  Cómo llegar
-                </a>
-                <Magnetic className="flex-1">
-                  <a
-                    href={WA_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary w-full justify-center"
-                  >
-                    <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={18} variant="solid" />
-                    WhatsApp
-                  </a>
-                </Magnetic>
-              </div>
-            </Reveal>
+        <RevealMask className="mb-10 md:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <span className="eyebrow text-primary mb-3 block">08 — Encontranos</span>
+            <h2 className="section-title text-foreground">Dónde estamos</h2>
           </div>
+          <GoogleRatingBadge className="text-foreground bg-card border border-border rounded-full px-3.5 py-2 shadow-sm self-start sm:self-auto" />
+        </RevealMask>
 
-          {/* Mapa chico */}
-          <ScaleIn delay={0.15} className="lg:w-3/5 w-full">
-            <div
-              className="rounded-2xl overflow-hidden border border-border shadow-sm"
-              style={{ height: '260px' }}
-            >
-              <iframe
-                src={MAPS_EMBED}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Ubicación Motocenter — ${ADDRESS.full}`}
-                aria-label="Mapa de ubicación de Motocenter en Trinidad, Uruguay"
-              />
+        {/* Mapa grande con ficha flotante encima, tipo "tarjeta de ubicación" */}
+        <ScaleIn>
+          <div className="relative rounded-3xl overflow-hidden border border-border shadow-xl h-[380px] md:h-[460px]">
+            <iframe
+              src={MAPS_EMBED}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Ubicación Motocenter — ${ADDRESS.full}`}
+              aria-label="Mapa de ubicación de Motocenter en Trinidad, Uruguay"
+              className="grayscale-[15%]"
+            />
+
+            {/* Ficha flotante: dirección, teléfono y acciones */}
+            <div className="absolute left-4 right-4 bottom-4 md:left-6 md:bottom-6 md:right-auto md:w-[340px]">
+              <Reveal delay={0.1} y={12}>
+                <div className="relative bg-card/95 backdrop-blur-md border border-border rounded-2xl p-5 shadow-2xl">
+                  <span className="font-scrawl text-primary text-xl absolute -top-6 left-4 -rotate-3 select-none hidden md:block">
+                    Acá estamos ↓
+                  </span>
+
+                  <div className="flex items-start gap-3 mb-3">
+                    <Icon
+                      name="MapPinIcon"
+                      size={20}
+                      className="text-primary flex-shrink-0 mt-0.5"
+                    />
+                    <div>
+                      <p className="font-800 text-foreground text-base leading-tight">
+                        {ADDRESS.street}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {ADDRESS.locality}, Departamento de {ADDRESS.region}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
+                    <Icon name="PhoneIcon" size={20} className="text-primary flex-shrink-0" />
+                    <div>
+                      <p className="font-800 text-foreground text-sm leading-tight">
+                        {DISPLAY_PHONE}
+                      </p>
+                      <p className="text-muted-foreground text-xs">WhatsApp y llamadas</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2.5">
+                    <a
+                      href={MAPS_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-dark flex-1 justify-center !py-2.5 !px-3 text-sm !min-h-0"
+                    >
+                      <Icon name="MapPinIcon" size={16} />
+                      Cómo llegar
+                    </a>
+                    <Magnetic className="flex-1">
+                      <a
+                        href={WA_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary w-full justify-center !py-2.5 !px-3 text-sm !min-h-0"
+                      >
+                        <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={16} variant="solid" />
+                        WhatsApp
+                      </a>
+                    </Magnetic>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-            <p className="text-xs text-muted-foreground text-center mt-3">
-              {ADDRESS.full} — Abrí en Google Maps para navegación
-            </p>
-          </ScaleIn>
-        </div>
+          </div>
+        </ScaleIn>
       </div>
     </section>
   );
