@@ -51,6 +51,7 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
+            id="header-logo-anchor"
             className="flex items-center gap-2.5 min-w-0 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0"
           >
             <AppLogo
