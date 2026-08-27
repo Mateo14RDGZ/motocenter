@@ -1,20 +1,67 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimate, useReducedMotion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 
-const VISIBLE_MS = 1500;
+// La moto está dibujada inclinada dentro del PNG. Esta rotación corrige esa
+// inclinación para que entre "horizontal"; al llegar, se quita (rotate: 0)
+// para volver a la pose original del arte.
+const LEVEL_ROTATION = 14;
 
 export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
   const reduceMotion = useReducedMotion();
+  const [scope, animate] = useAnimate();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    const timer = setTimeout(() => setVisible(false), reduceMotion ? 400 : VISIBLE_MS);
-    return () => clearTimeout(timer);
-  }, [reduceMotion]);
+    let cancelled = false;
+
+    async function sequence() {
+      try {
+        if (reduceMotion) {
+          await new Promise((r) => setTimeout(r, 400));
+        } else {
+          await Promise.all([
+            animate(
+              '.splash-moto',
+              { x: ['-90%', '0%'], rotate: LEVEL_ROTATION, opacity: [0, 1] },
+              { duration: 0.55, ease: [0.16, 1, 0.3, 1] }
+            ),
+            animate(
+              '.splash-center',
+              { scale: [0.3, 1], opacity: [0, 1] },
+              { duration: 0.45, delay: 0.22, ease: [0.34, 1.56, 0.64, 1] }
+            ),
+          ]);
+
+          await animate(
+            '.splash-moto',
+            { rotate: 0 },
+            { duration: 0.26, ease: [0.16, 1, 0.3, 1] }
+          );
+
+          animate('.splash-flash', { opacity: [0, 0.5, 0] }, { duration: 0.35, ease: 'easeOut' });
+          await animate(
+            '.splash-lockup',
+            { scale: [1, 1.08, 0.97, 1], x: [0, -7, 4, 0] },
+            { duration: 0.4, ease: 'easeOut' }
+          );
+
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      } catch {
+        // si algo falla en la animación, igual mostramos el sitio
+      }
+      if (!cancelled) setVisible(false);
+    }
+
+    sequence();
+    return () => {
+      cancelled = true;
+    };
+  }, [reduceMotion, animate]);
 
   useEffect(() => {
     if (!visible) {
@@ -26,84 +73,67 @@ export default function SplashScreen() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          ref={scope}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-ink overflow-hidden"
           initial={false}
-          exit={
-            reduceMotion
-              ? { opacity: 0 }
-              : { clipPath: 'circle(0% at 50% 50%)' }
-          }
+          exit={reduceMotion ? { opacity: 0 } : { clipPath: 'circle(0% at 50% 50%)' }}
           transition={{ duration: reduceMotion ? 0.3 : 0.65, ease: [0.76, 0, 0.24, 1] }}
           style={reduceMotion ? undefined : { clipPath: 'circle(150% at 50% 50%)' }}
           aria-hidden="true"
         >
-          {/* Resplandor pulsante detrás del logo */}
+          {/* Resplandor de fondo */}
           {!reduceMotion && (
             <motion.div
-              className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] rounded-full bg-primary/25 blur-3xl"
-              animate={{ scale: [0.8, 1.15, 0.8], opacity: [0.3, 0.6, 0.3] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-full bg-primary/20 blur-3xl"
+              animate={{ scale: [0.85, 1.1, 0.85], opacity: [0.25, 0.5, 0.25] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             />
           )}
 
-          {/* Líneas de velocidad cruzando la pantalla */}
-          {!reduceMotion &&
-            [0, 1, 2].map((i) => (
-              <motion.span
-                key={i}
-                className="absolute h-[2px] bg-gradient-to-r from-transparent via-primary/70 to-transparent"
-                style={{ width: 140 + i * 50, top: `${36 + i * 12}%` }}
-                initial={{ x: '-130%', opacity: 0 }}
-                animate={{ x: '130%', opacity: [0, 1, 0] }}
-                transition={{
-                  duration: 1.1,
-                  repeat: Infinity,
-                  delay: i * 0.22,
-                  ease: 'easeInOut',
-                }}
-              />
-            ))}
+          {/* Flash del impacto */}
+          <div className="splash-flash absolute inset-0 bg-primary pointer-events-none opacity-0" />
 
-          <div className="relative flex flex-col items-center gap-7">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.55, rotate: -14 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={
-                reduceMotion
-                  ? { duration: 0.3 }
-                  : { type: 'spring', stiffness: 170, damping: 13, delay: 0.05 }
-              }
-            >
-              <AppImage
-                src="/assets/images/motocenter-logo.png"
-                alt="Motocenter"
-                width={340}
-                height={210}
-                className="w-[200px] sm:w-[240px] h-auto drop-shadow-[0_0_28px_rgba(220,38,38,0.35)]"
-                priority
-                quality={100}
-                showLoadingBg={false}
-              />
-            </motion.div>
-
-            {/* Puntos de carga */}
-            {!reduceMotion && (
-              <div className="flex gap-2">
-                {[0, 1, 2].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="w-2 h-2 rounded-full bg-primary"
-                    animate={{ opacity: [0.25, 1, 0.25], y: [0, -6, 0] }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      delay: i * 0.15,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                ))}
+          <div className="splash-lockup relative flex flex-col items-center">
+            <div className="relative w-[230px] sm:w-[290px]">
+              {/* Pieza 1: la moto */}
+              <div
+                className="splash-moto relative z-10"
+                style={
+                  reduceMotion
+                    ? undefined
+                    : { opacity: 0, transform: `translateX(-90%) rotate(${LEVEL_ROTATION}deg)` }
+                }
+              >
+                <AppImage
+                  src="/assets/images/splash/moto-piece.png"
+                  alt=""
+                  width={1507}
+                  height={966}
+                  className="w-full h-auto drop-shadow-[0_0_20px_rgba(220,38,38,0.3)]"
+                  priority
+                  quality={100}
+                  showLoadingBg={false}
+                />
               </div>
-            )}
+
+              {/* Pieza 2: el texto CENTER */}
+              <div
+                className="splash-center relative z-0 -mt-[8%] w-[92%] mx-auto"
+                style={reduceMotion ? undefined : { opacity: 0, transform: 'scale(0.3)' }}
+              >
+                <AppImage
+                  src="/assets/images/splash/center-piece.png"
+                  alt=""
+                  width={1501}
+                  height={494}
+                  className="w-full h-auto"
+                  priority
+                  quality={100}
+                  showLoadingBg={false}
+                />
+              </div>
+            </div>
+            <span className="sr-only">Motocenter</span>
           </div>
         </motion.div>
       )}
