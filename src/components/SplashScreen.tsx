@@ -96,7 +96,7 @@ export default function SplashScreen() {
               ? { opacity: 0, transition: { duration: 0.3 } }
               : {
                   clipPath: `circle(0% at ${target.x}% ${target.y}%)`,
-                  transition: { duration: 0.65, ease: [0.76, 0, 0.24, 1] },
+                  transition: { duration: 1.1, ease: [0.65, 0, 0.35, 1] },
                 }
           }
           aria-hidden="true"
