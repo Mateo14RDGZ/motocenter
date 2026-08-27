@@ -19,7 +19,7 @@ const unbounded = Unbounded({
   display: 'swap',
 });
 
-// Fuente manuscrita para el toque "cartel de barrio" (sello, acentos, firma)
+// Fuente manuscrita para el toque "taller tradicional" (sello, acentos, firma)
 const caveat = Caveat({
   subsets: ['latin'],
   weight: ['600', '700'],

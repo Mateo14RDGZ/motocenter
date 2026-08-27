@@ -108,7 +108,7 @@
     font-weight: 800;
   }
 
-  /* Fuente manuscrita para el toque "cartel de barrio": sellos, acentos, tachados */
+  /* Fuente manuscrita para el toque "taller tradicional": sellos, acentos, tachados */
   .font-scrawl {
     font-family: var(--font-caveat), 'Caveat', cursive;
   }

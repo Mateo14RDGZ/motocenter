@@ -52,7 +52,7 @@ export default function HeroSection() {
       >
         <AppImage
           src="https://images.unsplash.com/photo-1766170507513-ef249e0ca426"
-          alt="Taller de motos pequeño y desordenado, con motos y repuestos, ambiente de barrio"
+          alt="Taller de motos pequeño y desordenado, con motos y repuestos, ambiente de taller tradicional"
           fill
           priority
           sizes="100vw"
@@ -80,7 +80,7 @@ export default function HeroSection() {
               </span>
               <GoogleRatingBadge className="hang-tag text-paper/85 hover:border-paper/50 transition-colors" />
               <span className="stamp-badge font-scrawl text-primary text-xl md:text-2xl px-5 py-2 leading-none select-none rotate-2">
-                Taller de barrio
+                De toda la vida
               </span>
             </motion.div>
 
@@ -90,7 +90,7 @@ export default function HeroSection() {
               className="hero-title text-primary block mb-4"
               delay={0.24}
             />
-            {/* Trazo tipo cartel pintado a mano, acento "de barrio" */}
+            {/* Trazo tipo cartel pintado a mano, acento de taller tradicional */}
             <svg
               viewBox="0 0 160 16"
               className="w-32 md:w-40 h-4 text-primary/70 mb-5"
@@ -112,7 +112,7 @@ export default function HeroSection() {
               transition={{ duration: 0.55, delay: 0.2, ease: easeOut }}
             >
               Taller mecánico de motos en Trinidad: diagnóstico, reparación y mantenimiento, con los
-              repuestos que hacen falta para dejarla andando. Sin vueltas, como en el barrio.
+              repuestos que hacen falta para dejarla andando. Sin vueltas, como siempre.
               Consultanos por WhatsApp.
             </motion.p>
 
