@@ -26,11 +26,7 @@ export default function CtaSection() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <Reveal>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 border border-white/20 rounded-full bg-white/8">
-            <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-            <span className="eyebrow text-secondary-foreground/70">Atención directa</span>
-          </div>
+          <span className="eyebrow text-primary mb-3 block">Atención directa</span>
 
           <RevealMask>
             <h2 className="section-title text-secondary-foreground mb-5 text-balance">

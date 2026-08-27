@@ -69,17 +69,18 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="max-w-2xl">
             <motion.div
-              className="flex flex-wrap items-center gap-3 mb-6"
+              className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-7"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: easeOut }}
             >
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/20 rounded-full bg-white/5">
+              <span className="inline-flex items-center gap-1.5 text-paper/70">
                 <Icon name="MapPinIcon" size={13} variant="solid" className="text-primary flex-shrink-0" />
-                <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
-              </div>
-              <GoogleRatingBadge className="px-3 py-1.5 border border-white/20 rounded-full bg-white/5 text-paper hover:bg-white/10 transition-colors" />
-              <span className="stamp-badge font-scrawl text-primary text-base px-3.5 leading-none select-none">
+                <span className="eyebrow">Trinidad · Flores · Uruguay</span>
+              </span>
+              <span className="w-1 h-1 rounded-full bg-paper/25 flex-shrink-0" aria-hidden="true" />
+              <GoogleRatingBadge className="text-paper/80 hover:text-paper transition-colors" />
+              <span className="stamp-badge font-scrawl text-primary text-base px-3.5 leading-none select-none ml-1">
                 Taller de barrio
               </span>
             </motion.div>
