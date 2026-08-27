@@ -79,14 +79,31 @@ export default function HeroSection() {
                 <span className="eyebrow text-paper/80">Trinidad · Flores · Uruguay</span>
               </div>
               <GoogleRatingBadge className="px-3 py-1.5 border border-white/20 rounded-full bg-white/5 text-paper hover:bg-white/10 transition-colors" />
+              <span className="stamp-badge font-scrawl text-primary text-base px-3.5 leading-none select-none">
+                Taller de barrio
+              </span>
             </motion.div>
 
             <SplitText text="Tu moto en" className="hero-title text-paper block" delay={0.1} />
             <SplitText
               text="buenas manos"
-              className="hero-title text-primary block mb-5"
+              className="hero-title text-primary block mb-4"
               delay={0.24}
             />
+            {/* Trazo tipo cartel pintado a mano, acento "de barrio" */}
+            <svg
+              viewBox="0 0 160 16"
+              className="w-32 md:w-40 h-4 text-primary/70 mb-5"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 9 C 30 3, 60 13, 90 7 C 110 3, 135 11, 158 6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            </svg>
 
             <motion.p
               className="text-lg md:text-xl text-paper/70 font-500 leading-relaxed mb-8 max-w-lg"
@@ -95,7 +112,8 @@ export default function HeroSection() {
               transition={{ duration: 0.55, delay: 0.2, ease: easeOut }}
             >
               Taller mecánico de motos en Trinidad: diagnóstico, reparación y mantenimiento, con los
-              repuestos que hacen falta para dejarla andando. Consultanos por WhatsApp.
+              repuestos que hacen falta para dejarla andando. Sin vueltas, como en el barrio.
+              Consultanos por WhatsApp.
             </motion.p>
 
             <motion.div

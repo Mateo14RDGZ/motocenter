@@ -16,6 +16,9 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-2 mb-6">
           <AppLogo size={160} className="opacity-95" />
           <span className="text-xs text-secondary-foreground/50">Trinidad, Flores</span>
+          <span className="font-scrawl text-2xl text-primary/80 -rotate-2 mt-1">
+            ¡Gracias por pasar!
+          </span>
         </div>
 
         {/* Links */}

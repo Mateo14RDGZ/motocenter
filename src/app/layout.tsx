@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, Unbounded } from 'next/font/google';
+import { Plus_Jakarta_Sans, Unbounded, Caveat } from 'next/font/google';
 import '../styles/tailwind.css';
 import { ADDRESS, WA_NUMBER, MAPS_LAT, MAPS_LNG, MAPS_LINK } from '@/config/business';
 
@@ -15,6 +15,14 @@ const unbounded = Unbounded({
   subsets: ['latin'],
   weight: ['500', '600', '700', '800', '900'],
   variable: '--font-unbounded',
+  display: 'swap',
+});
+
+// Fuente manuscrita para el toque "cartel de barrio" (sello, acentos, firma)
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  variable: '--font-caveat',
   display: 'swap',
 });
 
@@ -76,7 +84,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${plusJakartaSans.variable} ${unbounded.variable}`}>
+    <html
+      lang="es"
+      className={`${plusJakartaSans.variable} ${unbounded.variable} ${caveat.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
