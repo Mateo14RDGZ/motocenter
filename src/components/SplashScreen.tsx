@@ -116,10 +116,10 @@ export default function SplashScreen() {
             }
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <div className="relative w-[230px] sm:w-[290px]">
+            <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019]">
               {/* Pieza 1: la moto, viaja sola y choca */}
               <motion.div
-                className="relative z-10"
+                className="absolute inset-0 z-10"
                 initial={
                   reduceMotion
                     ? undefined
@@ -147,16 +147,20 @@ export default function SplashScreen() {
                   alt=""
                   width={1536}
                   height={1019}
-                  className="w-full h-auto"
+                  className="w-full h-full"
                   priority
                   quality={100}
                   showLoadingBg={false}
                 />
               </motion.div>
 
-              {/* Pieza 2: el texto CENTER, aparece recién cuando la moto choca */}
+              {/* Pieza 2: el texto CENTER, aparece recién cuando la moto choca.
+                  Posición calculada a partir del logo original (izq. 33% / arriba
+                  63% / ancho 76% respecto del arte de la moto) para que el logo
+                  armado quede idéntico al original. */}
               <motion.div
-                className="relative z-0 -mt-[12%] w-[68%] ml-auto mr-[2%]"
+                className="absolute z-0"
+                style={{ left: '33%', top: '63%', width: '76%' }}
                 initial={reduceMotion ? undefined : { scale: 0.3, opacity: 0 }}
                 animate={
                   reduceMotion
