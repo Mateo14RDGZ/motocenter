@@ -193,10 +193,17 @@ export default function SplashScreen() {
 
               {/* Logo original completo (moto + CENTER), tal cual el arte
                   final: aparece de repente, recién cuando la moto ya
-                  levantó el frente. Al ser el archivo original, el
-                  resultado queda idéntico. */}
+                  levantó el frente. Se escala y desplaza (126.76% / -13.5%)
+                  para que la moto, dentro del logo, quede exactamente al
+                  mismo tamaño y posición con los que entró: el archivo
+                  completo es más ancho porque incluye el texto, así que si
+                  se mostrara "a caja completa" la moto se vería más chica
+                  que antes del choque. Con este ajuste no cambia de tamaño
+                  en ningún momento, en PC ni en mobile (son porcentajes
+                  relativos al mismo contenedor). */}
               <motion.div
-                className="absolute inset-0 z-20 flex items-center justify-center"
+                className="absolute z-20"
+                style={{ left: '-13.5%', top: '0%', width: '126.76%' }}
                 initial={reduceMotion ? undefined : { scale: 0.94, opacity: 0 }}
                 animate={
                   reduceMotion
