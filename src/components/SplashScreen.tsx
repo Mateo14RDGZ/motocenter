@@ -93,12 +93,6 @@ export default function SplashScreen() {
     };
   }, [reduceMotion, imagesReady]);
 
-  useEffect(() => {
-    if (!visible) {
-      document.body.style.overflow = '';
-    }
-  }, [visible]);
-
   // La moto ya llegó (terminó de entrar): a partir de acá levanta el frente
   const hasArrived = phase !== 'enter';
   // El logo original ya está (o está por estar) visible
@@ -107,9 +101,12 @@ export default function SplashScreen() {
   return (
     <AnimatePresence
       onExitComplete={() => {
-        // Recién acá el splash terminó de desaparecer del todo (incluida la
-        // transición de cierre): avisamos para que cosas como el indicador
-        // de scroll esperen a este momento antes de mostrarse.
+        // Recién acá el splash terminó de desaparecer del todo, incluida la
+        // transición de cierre (antes, `visible` pasaba a false pero la
+        // animación de cierre seguía 1.1s más en pantalla). Solo ahora
+        // liberamos el scroll y avisamos para que el indicador de scroll y
+        // cualquier otra cosa esperen a este momento antes de mostrarse.
+        document.body.style.overflow = '';
         window.dispatchEvent(new Event('splash-done'));
       }}
     >
