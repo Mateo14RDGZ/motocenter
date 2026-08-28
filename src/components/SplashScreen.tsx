@@ -116,8 +116,9 @@ export default function SplashScreen() {
             }
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019]">
-              {/* Pieza 1: la moto, viaja sola y choca */}
+            <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019] flex items-center justify-center">
+              {/* Pieza 1: la moto, viaja sola y choca. Al llegar se desvanece
+                  para dar paso al logo original completo (abajo). */}
               <motion.div
                 className="absolute inset-0 z-10"
                 initial={
@@ -130,13 +131,15 @@ export default function SplashScreen() {
                     ? undefined
                     : {
                         x: 0,
-                        opacity: 1,
+                        opacity: hasArrived ? 0 : 1,
                         rotate: hasArrived ? 0 : LEVEL_ROTATION,
                       }
                 }
                 transition={{
                   x: { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
-                  opacity: { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
+                  opacity: hasArrived
+                    ? { duration: 0.15, ease: 'easeOut' }
+                    : { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
                   rotate: hasArrived
                     ? { duration: 0.18, ease: 'easeOut' }
                     : { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
@@ -154,28 +157,26 @@ export default function SplashScreen() {
                 />
               </motion.div>
 
-              {/* Pieza 2: el texto CENTER, aparece recién cuando la moto choca.
-                  Posición calculada por centroide contra el logo original (izq.
-                  41% / arriba 59% / ancho 76% respecto del arte de la moto) para
-                  que el logo armado quede idéntico al original. */}
+              {/* Logo original completo (moto + CENTER), tal cual el arte
+                  final: aparece justo en el choque, con zoom + sacudida. Al
+                  ser el archivo original, el resultado queda idéntico. */}
               <motion.div
-                className="absolute z-0"
-                style={{ left: '41%', top: '59%', width: '76%' }}
-                initial={reduceMotion ? undefined : { scale: 0.3, opacity: 0 }}
+                className="absolute inset-0 z-20 flex items-center justify-center"
+                initial={reduceMotion ? undefined : { scale: 0.82, opacity: 0 }}
                 animate={
                   reduceMotion
                     ? undefined
                     : hasArrived
                       ? { scale: 1, opacity: 1 }
-                      : { scale: 0.3, opacity: 0 }
+                      : { scale: 0.82, opacity: 0 }
                 }
                 transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <AppImage
-                  src="/assets/images/splash/center-piece.png"
+                  src="/assets/images/motocenter-logo.png"
                   alt=""
-                  width={1932}
-                  height={680}
+                  width={1606}
+                  height={979}
                   className="w-full h-auto"
                   priority
                   quality={100}
