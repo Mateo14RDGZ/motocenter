@@ -155,12 +155,12 @@ export default function SplashScreen() {
               </motion.div>
 
               {/* Pieza 2: el texto CENTER, aparece recién cuando la moto choca.
-                  Posición calculada a partir del logo original (izq. 33% / arriba
-                  63% / ancho 76% respecto del arte de la moto) para que el logo
-                  armado quede idéntico al original. */}
+                  Posición calculada por centroide contra el logo original (izq.
+                  41% / arriba 59% / ancho 76% respecto del arte de la moto) para
+                  que el logo armado quede idéntico al original. */}
               <motion.div
                 className="absolute z-0"
-                style={{ left: '33%', top: '63%', width: '76%' }}
+                style={{ left: '41%', top: '59%', width: '76%' }}
                 initial={reduceMotion ? undefined : { scale: 0.3, opacity: 0 }}
                 animate={
                   reduceMotion
