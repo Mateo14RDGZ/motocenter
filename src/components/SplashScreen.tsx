@@ -5,27 +5,36 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 
 // La moto está dibujada inclinada dentro del PNG. Esta rotación corrige esa
-// inclinación para que entre "nivelada"; al chocar, se quita (rotate: 0)
-// para volver a la pose original del arte.
+// inclinación para que entre "nivelada" (horizontal); al llegar, se quita
+// (rotate: 0) para que el frente se "levante" y vuelva a la pose original
+// del arte, la misma con la que está dibujada en el logo final.
 const LEVEL_ROTATION = 14;
 
 // Suficientemente lejos como para arrancar más allá del borde izquierdo de
 // la pantalla en cualquier dispositivo (el contenedor va centrado).
 const START_X = -2200;
 
-const T_ENTER = 650; // la moto viaja sola desde la izquierda
-const T_IMPACT = 320; // choque: la moto se endereza + aparece el texto + sacudida
-const T_HOLD = 550; // se mantiene el logo armado
+const T_ENTER = 1300; // la moto entra sola, lenta y horizontal, desde la izquierda
+const T_LIFT = 420; // ya en posición, levanta el frente (vuelve a su pose original)
+const T_REVEAL = 260; // de repente aparece el logo original completo
+const T_HOLD = 700; // se mantiene el logo armado
 
-type Phase = 'enter' | 'impact' | 'hold';
+type Phase = 'enter' | 'lift' | 'reveal' | 'hold';
 
 // Punto por defecto (centro) hasta que se mida la posición real del logo
 const DEFAULT_TARGET = { x: 50, y: 50 };
+
+// Tiempo máximo que se espera a que las imágenes terminen de decodificar
+// antes de arrancar la secuencia igual (evita que quede colgada si algo
+// falla al cargar).
+const MAX_IMAGE_WAIT = 900;
 
 export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
   const [phase, setPhase] = useState<Phase>('enter');
   const [target, setTarget] = useState(DEFAULT_TARGET);
+  const [motoLoaded, setMotoLoaded] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -40,7 +49,24 @@ export default function SplashScreen() {
     }
   }, []);
 
+  // Antes de arrancar el timeline, esperamos a que las dos imágenes clave ya
+  // estén decodificadas (o a un máximo de espera). Sin esto, en una carga
+  // fría (caché vacía, red lenta) la secuencia arranca igual por reloj y la
+  // moto o el logo final pueden aparecer recortados/en blanco a mitad de la
+  // animación en vez de recién cuando ya están listos para pintarse.
+  const imagesReady = reduceMotion || (motoLoaded && logoLoaded);
+
   useEffect(() => {
+    if (imagesReady) return;
+    const t = setTimeout(() => {
+      setMotoLoaded(true);
+      setLogoLoaded(true);
+    }, MAX_IMAGE_WAIT);
+    return () => clearTimeout(t);
+  }, [imagesReady]);
+
+  useEffect(() => {
+    if (!imagesReady) return;
     document.body.style.overflow = 'hidden';
 
     if (reduceMotion) {
@@ -50,19 +76,22 @@ export default function SplashScreen() {
 
     const timers = [
       setTimeout(() => {
-        setPhase('impact');
+        setPhase('lift');
       }, T_ENTER),
       setTimeout(() => {
+        setPhase('reveal');
+      }, T_ENTER + T_LIFT),
+      setTimeout(() => {
         setPhase('hold');
-      }, T_ENTER + T_IMPACT),
+      }, T_ENTER + T_LIFT + T_REVEAL),
       setTimeout(() => {
         setVisible(false);
-      }, T_ENTER + T_IMPACT + T_HOLD),
+      }, T_ENTER + T_LIFT + T_REVEAL + T_HOLD),
     ];
     return () => {
       timers.forEach(clearTimeout);
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, imagesReady]);
 
   useEffect(() => {
     if (!visible) {
@@ -70,9 +99,10 @@ export default function SplashScreen() {
     }
   }, [visible]);
 
-  // La moto llegó y "chocó": a partir de acá se endereza y aparece el texto
+  // La moto ya llegó (terminó de entrar): a partir de acá levanta el frente
   const hasArrived = phase !== 'enter';
-  const impacting = phase === 'impact';
+  // El logo original ya está (o está por estar) visible
+  const revealed = phase === 'reveal' || phase === 'hold';
 
   return (
     <AnimatePresence>
@@ -110,15 +140,16 @@ export default function SplashScreen() {
           <motion.div
             className="relative flex flex-col items-center"
             animate={
-              reduceMotion || !impacting
-                ? { scale: 1, x: 0 }
-                : { scale: [1, 1.1, 0.96, 1], x: [0, -8, 5, 0] }
+              reduceMotion || phase !== 'reveal'
+                ? { scale: 1 }
+                : { scale: [1, 1.05, 0.99, 1] }
             }
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019] flex items-center justify-center">
-              {/* Pieza 1: la moto, viaja sola y choca. Al llegar se desvanece
-                  para dar paso al logo original completo (abajo). */}
+              {/* Pieza 1: la moto entra sola, lenta y horizontal. Al llegar
+                  levanta el frente y recién ahí se desvanece para dar paso
+                  al logo original completo (abajo), sin pisarse entre sí. */}
               <motion.div
                 className="absolute inset-0 z-10"
                 initial={
@@ -129,20 +160,22 @@ export default function SplashScreen() {
                 animate={
                   reduceMotion
                     ? undefined
-                    : {
-                        x: 0,
-                        opacity: hasArrived ? 0 : 1,
-                        rotate: hasArrived ? 0 : LEVEL_ROTATION,
-                      }
+                    : !imagesReady
+                      ? { x: START_X, opacity: 0, rotate: LEVEL_ROTATION }
+                      : {
+                          x: 0,
+                          opacity: revealed ? 0 : 1,
+                          rotate: hasArrived ? 0 : LEVEL_ROTATION,
+                        }
                 }
                 transition={{
-                  x: { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
-                  opacity: hasArrived
-                    ? { duration: 0.15, ease: 'easeOut' }
-                    : { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
+                  x: { duration: T_ENTER / 1000, ease: [0.22, 1, 0.36, 1] },
+                  opacity: revealed
+                    ? { duration: 0.16, ease: 'easeOut' }
+                    : { duration: T_ENTER / 1000, ease: [0.22, 1, 0.36, 1] },
                   rotate: hasArrived
-                    ? { duration: 0.18, ease: 'easeOut' }
-                    : { duration: T_ENTER / 1000, ease: [0.16, 1, 0.3, 1] },
+                    ? { duration: T_LIFT / 1000, ease: [0.33, 1, 0.68, 1] }
+                    : { duration: T_ENTER / 1000, ease: [0.22, 1, 0.36, 1] },
                 }}
               >
                 <AppImage
@@ -154,23 +187,25 @@ export default function SplashScreen() {
                   priority
                   quality={100}
                   showLoadingBg={false}
+                  onLoad={() => setMotoLoaded(true)}
                 />
               </motion.div>
 
               {/* Logo original completo (moto + CENTER), tal cual el arte
-                  final: aparece justo en el choque, con zoom + sacudida. Al
-                  ser el archivo original, el resultado queda idéntico. */}
+                  final: aparece de repente, recién cuando la moto ya
+                  levantó el frente. Al ser el archivo original, el
+                  resultado queda idéntico. */}
               <motion.div
                 className="absolute inset-0 z-20 flex items-center justify-center"
-                initial={reduceMotion ? undefined : { scale: 0.82, opacity: 0 }}
+                initial={reduceMotion ? undefined : { scale: 0.94, opacity: 0 }}
                 animate={
                   reduceMotion
                     ? undefined
-                    : hasArrived
+                    : imagesReady && revealed
                       ? { scale: 1, opacity: 1 }
-                      : { scale: 0.82, opacity: 0 }
+                      : { scale: 0.94, opacity: 0 }
                 }
-                transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+                transition={{ duration: T_REVEAL / 1000, ease: [0.16, 1, 0.3, 1] }}
               >
                 <AppImage
                   src="/assets/images/motocenter-logo.png"
@@ -181,6 +216,7 @@ export default function SplashScreen() {
                   priority
                   quality={100}
                   showLoadingBg={false}
+                  onLoad={() => setLogoLoaded(true)}
                 />
               </motion.div>
             </div>
