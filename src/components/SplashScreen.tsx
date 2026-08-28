@@ -150,23 +150,6 @@ export default function SplashScreen() {
             }
             transition={{ duration: 0.46, ease: 'easeOut' }}
           >
-            {/* Destello de impacto: un anillo que estalla justo en el choque
-                para que se note el golpe, sin tapar el logo. */}
-            {!reduceMotion && phase === 'reveal' && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
-                aria-hidden="true"
-              >
-                <motion.span
-                  className="rounded-full border-2 border-primary/80"
-                  style={{ width: '40%', height: '40%' }}
-                  initial={{ scale: 0.5, opacity: 0.9 }}
-                  animate={{ scale: 2.6, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                />
-              </motion.div>
-            )}
-
             <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019] flex items-center justify-center">
               {/* Pieza 1: la moto entra sola, lenta y horizontal. Al llegar
                   levanta el frente y recién ahí se desvanece para dar paso
