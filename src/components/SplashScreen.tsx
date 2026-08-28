@@ -16,7 +16,7 @@ const START_X = -2200;
 
 const T_ENTER = 1300; // la moto entra sola, lenta y horizontal, desde la izquierda
 const T_LIFT = 420; // ya en posición, levanta el frente (vuelve a su pose original)
-const T_REVEAL = 260; // de repente aparece el logo original completo
+const T_REVEAL = 320; // de repente aparece el logo original completo, con golpe
 const T_HOLD = 700; // se mantiene el logo armado
 
 type Phase = 'enter' | 'lift' | 'reveal' | 'hold';
@@ -141,11 +141,32 @@ export default function SplashScreen() {
             className="relative flex flex-col items-center"
             animate={
               reduceMotion || phase !== 'reveal'
-                ? { scale: 1 }
-                : { scale: [1, 1.05, 0.99, 1] }
+                ? { scale: 1, x: 0, rotate: 0 }
+                : {
+                    scale: [1, 1.16, 0.92, 1.05, 0.99, 1],
+                    x: [0, -10, 7, -4, 2, 0],
+                    rotate: [0, -1.5, 1.2, -0.5, 0],
+                  }
             }
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.46, ease: 'easeOut' }}
           >
+            {/* Destello de impacto: un anillo que estalla justo en el choque
+                para que se note el golpe, sin tapar el logo. */}
+            {!reduceMotion && phase === 'reveal' && (
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
+                aria-hidden="true"
+              >
+                <motion.span
+                  className="rounded-full border-2 border-primary/80"
+                  style={{ width: '40%', height: '40%' }}
+                  initial={{ scale: 0.5, opacity: 0.9 }}
+                  animate={{ scale: 2.6, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                />
+              </motion.div>
+            )}
+
             <div className="relative w-[230px] sm:w-[290px] aspect-[1536/1019] flex items-center justify-center">
               {/* Pieza 1: la moto entra sola, lenta y horizontal. Al llegar
                   levanta el frente y recién ahí se desvanece para dar paso
@@ -204,15 +225,15 @@ export default function SplashScreen() {
               <motion.div
                 className="absolute z-20"
                 style={{ left: '-13.5%', top: '0%', width: '126.76%' }}
-                initial={reduceMotion ? undefined : { scale: 0.94, opacity: 0 }}
+                initial={reduceMotion ? undefined : { scale: 0.82, opacity: 0 }}
                 animate={
                   reduceMotion
                     ? undefined
                     : imagesReady && revealed
                       ? { scale: 1, opacity: 1 }
-                      : { scale: 0.94, opacity: 0 }
+                      : { scale: 0.82, opacity: 0 }
                 }
-                transition={{ duration: T_REVEAL / 1000, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: T_REVEAL / 1000, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <AppImage
                   src="/assets/images/motocenter-logo.png"
