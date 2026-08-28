@@ -105,7 +105,14 @@ export default function SplashScreen() {
   const revealed = phase === 'reveal' || phase === 'hold';
 
   return (
-    <AnimatePresence>
+    <AnimatePresence
+      onExitComplete={() => {
+        // Recién acá el splash terminó de desaparecer del todo (incluida la
+        // transición de cierre): avisamos para que cosas como el indicador
+        // de scroll esperen a este momento antes de mostrarse.
+        window.dispatchEvent(new Event('splash-done'));
+      }}
+    >
       {visible && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-ink overflow-hidden"
