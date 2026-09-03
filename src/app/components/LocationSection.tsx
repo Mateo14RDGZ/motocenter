@@ -11,7 +11,7 @@ export default function LocationSection() {
     <section id="ubicacion" className="py-20 md:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <RevealMask className="mb-10 md:mb-14">
-          <span className="eyebrow text-primary mb-3 block">09 — Encontranos</span>
+          <span className="eyebrow text-primary mb-3 block">08 — Encontranos</span>
           <h2 className="section-title text-foreground">Dónde estamos</h2>
         </RevealMask>
 

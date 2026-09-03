@@ -1,3 +1,6 @@
+// NOTA: esta sección está fuera del render de la homepage (ver src/app/page.tsx)
+// para la V1 de presentación al cliente. El componente y sus assets se
+// conservan intactos para poder reincorporarla más adelante si se aprueba.
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
 import RevealMask from '@/components/motion/RevealMask';

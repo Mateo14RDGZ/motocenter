@@ -76,7 +76,7 @@ export default function HoursSection() {
           {/* Header + Status */}
           <div className="lg:w-2/5">
             <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">08 — Horarios</span>
+              <span className="eyebrow text-primary mb-3 block">07 — Horarios</span>
               <h2 className="section-title text-foreground mb-5">Cuando estamos abiertos</h2>
               <p className="text-muted-foreground text-base leading-relaxed mb-6">
                 Pasá por el local o escribinos por WhatsApp. También hacemos delivery.

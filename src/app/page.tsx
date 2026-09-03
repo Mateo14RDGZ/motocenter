@@ -6,7 +6,8 @@ import SectionDots from '@/components/SectionDots';
 import HeroSection from '@/app/components/HeroSection';
 import ServicesSection from '@/app/components/ServicesSection';
 import PartsSection from '@/app/components/PartsSection';
-import BrandsSection from '@/app/components/BrandsSection';
+// BrandsSection: fuera del render para la V1 (ver nota en el componente).
+// import BrandsSection from '@/app/components/BrandsSection';
 import AccessoriesSection from '@/app/components/AccessoriesSection';
 import AboutSection from '@/app/components/AboutSection';
 import HowWeWorkSection from '@/app/components/HowWeWorkSection';
@@ -25,7 +26,7 @@ export default function HomePage() {
       <HeroSection />
       <ServicesSection />
       <PartsSection />
-      <BrandsSection />
+      {/* <BrandsSection /> — oculta temporalmente para la V1 */}
       <AccessoriesSection />
       <AboutSection />
       <HowWeWorkSection />

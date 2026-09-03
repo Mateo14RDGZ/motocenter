@@ -7,14 +7,12 @@ import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
 import { WA_LINK } from '@/config/business';
 
+// Nav corta para la V1: se prioriza lo esencial, el resto sigue accesible
+// scrolleando y desde el footer.
 const navLinks = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Repuestos', href: '#repuestos' },
-  { label: 'Marcas', href: '#marcas' },
-  { label: 'Accesorios', href: '#accesorios' },
   { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Horarios', href: '#horarios' },
   { label: 'Ubicación', href: '#ubicacion' },
 ];
 

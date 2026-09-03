@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
-import Marquee from '@/components/motion/Marquee';
 import SplitText from '@/components/motion/SplitText';
 import Magnetic from '@/components/motion/Magnetic';
 import { WA_LINK } from '@/config/business';
@@ -18,15 +17,6 @@ const stats = [
   { icon: 'Cog6ToothIcon' as const, label: 'Reparación', value: 'Mecánica general de motos' },
   { icon: 'CubeIcon' as const, label: 'Repuestos', value: 'Los que usamos en el taller' },
   { icon: 'UserGroupIcon' as const, label: 'Atención', value: 'Personalizada, cara a cara' },
-];
-
-const tickerItems = [
-  'Diagnóstico',
-  'Reparación',
-  'Mantenimiento',
-  'Repuestos',
-  'Trinidad · Flores',
-  'Service',
 ];
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
@@ -44,7 +34,8 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col bg-ink overflow-hidden"
     >
-      {/* Background image, cropped to the right two-thirds, con parallax al scrollear */}
+      {/* Background image, cropped to the right two-thirds, con parallax al scrollear.
+          TODO: reemplazar por una foto real del taller/local de Motocenter. */}
       <motion.div
         className="absolute inset-y-0 right-0 w-full md:w-2/3 z-0"
         style={{ y: parallaxY }}
@@ -74,7 +65,12 @@ export default function HeroSection() {
               transition={{ duration: 0.5, ease: easeOut }}
             >
               <span className="hang-tag text-paper/80">
-                <Icon name="MapPinIcon" size={12} variant="solid" className="text-primary flex-shrink-0" />
+                <Icon
+                  name="MapPinIcon"
+                  size={12}
+                  variant="solid"
+                  className="text-primary flex-shrink-0"
+                />
                 <span className="eyebrow">Trinidad · Flores</span>
               </span>
               <span className="stamp-badge font-scrawl text-primary text-xl md:text-2xl px-5 py-2 leading-none select-none rotate-2">
@@ -110,8 +106,8 @@ export default function HeroSection() {
               transition={{ duration: 0.55, delay: 0.2, ease: easeOut }}
             >
               Taller mecánico de motos en Trinidad: diagnóstico, reparación y mantenimiento, con los
-              repuestos que hacen falta para dejarla andando. Sin vueltas, como siempre.
-              Consultanos por WhatsApp.
+              repuestos que hacen falta para dejarla andando. Sin vueltas, como siempre. Consultanos
+              por WhatsApp.
             </motion.p>
 
             <motion.div
@@ -140,15 +136,10 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Ticker */}
-      <div className="relative z-10 border-t border-white/10 bg-ink/60 backdrop-blur-sm text-paper/60 py-3">
-        <Marquee items={tickerItems} />
-      </div>
-
       {/* Stats strip */}
-      <div className="relative z-20">
+      <div className="relative z-20 mt-8 md:mt-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="bg-card rounded-t-2xl shadow-2xl px-4 py-4 md:px-8 md:py-5">
+          <div className="bg-card rounded-2xl md:rounded-t-2xl md:rounded-b-none shadow-2xl px-4 py-4 md:px-8 md:py-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-border">
               {stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-3 md:px-6 first:pl-0 last:pr-0">

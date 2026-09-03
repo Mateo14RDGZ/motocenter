@@ -81,12 +81,18 @@ export default function SplashScreen() {
       setTimeout(() => {
         setPhase('reveal');
       }, T_ENTER + T_LIFT),
-      setTimeout(() => {
-        setPhase('hold');
-      }, T_ENTER + T_LIFT + T_REVEAL),
-      setTimeout(() => {
-        setVisible(false);
-      }, T_ENTER + T_LIFT + T_REVEAL + T_HOLD),
+      setTimeout(
+        () => {
+          setPhase('hold');
+        },
+        T_ENTER + T_LIFT + T_REVEAL
+      ),
+      setTimeout(
+        () => {
+          setVisible(false);
+        },
+        T_ENTER + T_LIFT + T_REVEAL + T_HOLD
+      ),
     ];
     return () => {
       timers.forEach(clearTimeout);
@@ -161,9 +167,7 @@ export default function SplashScreen() {
               <motion.div
                 className="absolute inset-0 z-10"
                 initial={
-                  reduceMotion
-                    ? undefined
-                    : { x: START_X, opacity: 0, rotate: LEVEL_ROTATION }
+                  reduceMotion ? undefined : { x: START_X, opacity: 0, rotate: LEVEL_ROTATION }
                 }
                 animate={
                   reduceMotion

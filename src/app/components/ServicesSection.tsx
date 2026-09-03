@@ -11,6 +11,8 @@ import { buildWhatsAppLink } from '@/config/business';
 
 const WA_LINK = buildWhatsAppLink('Hola Motocenter, quería consultar por un servicio...');
 
+// TODO: reemplazar las imágenes (campo `image`) por fotos reales del taller
+// cuando estén disponibles.
 const services = [
   {
     code: '01',

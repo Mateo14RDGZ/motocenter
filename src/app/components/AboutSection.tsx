@@ -5,10 +5,10 @@ import Magnetic from '@/components/motion/Magnetic';
 import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
 import { WA_LINK, ADDRESS } from '@/config/business';
 
+// Lo técnico (diagnóstico, service, repuestos) ya se cuenta en detalle en
+// Servicios y Repuestos: acá priorizamos lo humano, cómo es tratar con
+// nosotros, no repetir la lista de servicios.
 const highlights = [
-  { icon: 'WrenchScrewdriverIcon' as const, text: 'Diagnóstico y reparación' },
-  { icon: 'Cog6ToothIcon' as const, text: 'Mantenimiento y service' },
-  { icon: 'CubeIcon' as const, text: 'Repuestos para el arreglo' },
   { icon: 'TruckIcon' as const, text: 'Delivery incluido' },
   { icon: 'ChatBubbleOvalLeftEllipsisIcon' as const, text: 'Atención por WhatsApp' },
   { icon: 'MapPinIcon' as const, text: 'En el centro de Trinidad' },
@@ -22,7 +22,7 @@ export default function AboutSection() {
           {/* Text Side */}
           <div className="lg:w-1/2">
             <RevealMask>
-              <span className="eyebrow text-primary mb-3 block">05 — Sobre Motocenter</span>
+              <span className="eyebrow text-primary mb-3 block">04 — Sobre Motocenter</span>
               <h2 className="section-title text-foreground max-w-md mb-6">
                 Diagnóstico, reparación y el repuesto que hace falta
               </h2>
@@ -48,7 +48,7 @@ export default function AboutSection() {
 
           {/* Value Side */}
           <div className="lg:w-1/2 w-full">
-            <StaggerGroup className="grid grid-cols-2 gap-3 mb-6">
+            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
               {highlights.map((h) => (
                 <StaggerItem key={h.text}>
                   <div className="flex items-center gap-3 bg-muted rounded-xl px-4 py-3.5 border border-border h-full">
